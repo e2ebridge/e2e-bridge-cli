@@ -1,0 +1,32 @@
+{
+  "name": "e2econsole-cli",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "bin": {
+      "e2econsole": "./app.js"
+  },
+  "dependencies": {
+    "e2econsole": "git://nas1.e2e.ch/console-lib.git",
+    "minimist": "0.0.8",
+    "prompt": "~0.2.12"
+  },
+  "author": {
+    "name": "Jakub Zakrzewski",
+    "email": "jzakrzewski@e2e.ch"
+  },
+  "description": "CLI interface to E2E Console",
+  "keywords": [
+    ""
+  ],
+  "bugs": {
+    "web": "null"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://nas1.e2e.ch/console-cli.git"
+  }
+}
