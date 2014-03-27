@@ -1,5 +1,5 @@
 {
-  "name": "e2econsole-cli",
+  "name": "e2e-console-cli",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
       "e2econsole": "./app.js"
   },
   "dependencies": {
-    "e2econsole": "git://nas1.e2e.ch/console-lib.git",
+    "e2econsole": "git://nas1.e2e.ch/e2e-console-lib.git",
     "minimist": "0.0.8",
     "prompt": "~0.2.12"
   },
@@ -27,6 +27,6 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://nas1.e2e.ch/console-cli.git"
+    "url": "git://nas1.e2e.ch/e2e-console-cli.git"
   }
 }
