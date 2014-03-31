@@ -104,17 +104,23 @@ if( settings['operation'] === 'deploy'){
     }
 }
 
+prompt.override = settings;
 prompt.message = "Console";
 prompt.delimiter = ' ';
 
 // Ask user for missing required options.
-prompt.start().addProperties(settings, ['user', { name: 'password', hidden: true }], function (err) {
+// The more convienient prompt#addProperties API is broken
+prompt.start().get({ properties: { user: { required: true }, password: { required: true, hidden: true } } }, function (err, result) {
 
     // if all options given on command line, we get the original object as error. From my point of view it's stupid
     // but we have to deal with it.
-    if(err && err != settings) {
+    if(err) {
         process.stderr.write(JSON.stringify(err, null, '\t'));
         process.exit(3);
+    } else {
+        Object.keys(result).forEach(function(key){
+            settings[key] = result[key];
+        })
     }
 
     process.stdout.write('Working, please wait.\n');
