@@ -1,7 +1,6 @@
 {
   "name": "e2e-console-cli",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
   "scripts": {
     "start": "node app.js"
   },
@@ -9,24 +8,28 @@
       "e2econsole": "./app.js"
   },
   "dependencies": {
-    "e2econsole": "git://nas1.e2e.ch/e2e-console-lib.git",
+    "e2e-console-lib": "~0.1.0",
     "minimist": "0.0.8",
     "prompt": "~0.2.12"
   },
   "author": {
-    "name": "Jakub Zakrzewski",
-    "email": "jzakrzewski@e2e.ch"
+    "name": "E2E Technologies Ltd",
+    "email": "support@e2ebridge.com"
   },
+  "maintainers": [
+    {
+      "name": "Jakub Zakrzewski",
+      "email": "jzakrzewski@e2e.ch"
+    }
+  ],
+  "license": "MIT",
   "description": "CLI interface to E2E Console",
   "keywords": [
-    ""
+    "cli",
+    "e2e"
   ],
-  "bugs": {
-    "web": "null"
-  },
-  "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://nas1.e2e.ch/e2e-console-cli.git"
+    "url": "https://github.com/e2ebridge/e2e-console-cli.git"
   }
 }
