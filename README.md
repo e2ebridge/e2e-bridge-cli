@@ -17,7 +17,7 @@ A command-line interface to E2E Console based on Node.js
 ``` bash
 $ npm install [-g] e2e-console-cli
 ```
-Global installation may require additional privledges.
+Global installation may require additional privileges.
 
 ## Usage
 This guide assumes global installation. If you installed locally, replace ``` e2econsole ``` with ``` node path/to/app.js ``` (or, on linux ``` path/to/app.js ```).
