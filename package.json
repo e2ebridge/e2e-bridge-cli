@@ -1,14 +1,14 @@
 {
-  "name": "e2e-console-cli",
+  "name": "e2e-bridge-cli",
   "version": "0.1.0",
   "scripts": {
     "start": "node app.js"
   },
   "bin": {
-      "e2econsole": "./app.js"
+      "e2ebridge": "./app.js"
   },
   "dependencies": {
-    "e2e-console-lib": "~0.1.0",
+    "e2e-bridge-lib": "~0.1.0",
     "minimist": "0.0.8",
     "prompt": "~0.2.12"
   },
@@ -23,13 +23,13 @@
     }
   ],
   "license": "MIT",
-  "description": "CLI interface to E2E Console",
+  "description": "CLI interface to E2E Bridge",
   "keywords": [
     "cli",
     "e2e"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/e2ebridge/e2e-console-cli.git"
+    "url": "https://github.com/e2ebridge/e2e-bridge-cli.git"
   }
 }

@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-var E2EConsole = require('e2e-console-lib');
+var E2EBridge = require('e2e-bridge-lib');
 var util = require('util');
 var argv = require('minimist')(process.argv.slice(2));
 var prompt = require('prompt');
 var path = require('path');
 
+/** @const */ var XUML_SERVICE_TYPE = 'xUML';
+/** @const */ var NODE_SERVICE_TYPE = 'node';
 
 if(argv['help']) {
     showHelp();
@@ -105,7 +107,7 @@ if( settings['operation'] === 'deploy'){
 }
 
 prompt.override = settings;
-prompt.message = "Console";
+prompt.message = "Bridge";
 prompt.delimiter = ' ';
 
 // Ask user for missing required options.
@@ -164,12 +166,12 @@ function showHelp(message) {
         'deploy ${path/to/repository} [settings] [-o options]\n'+
         '--help\n\n' +
             'settings:\n' +
-            '\t-h|--host <FQDN console host> The host, that runs the console. Defaults to localhost.\n' +
-            '\t-p|--port <console port> The port of the console. Defaults to 8080.\n' +
-            '\t-n|--node <node name> The name of console node. Ignored for deployment. Defaults to ${host}.\n' +
-            "\t-u|--user <console user> User that has the right to perform operation on console.\n" +
+            '\t-h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.\n' +
+            '\t-p|--port <bridge port> The port of the bridge. Defaults to 8080.\n' +
+            '\t-n|--node <node name> The name of bridge node. Ignored for deployment. Defaults to ${host}.\n' +
+            "\t-u|--user <bridge user> User that has the right to perform operation on bridge.\n" +
             "\t\tRequired. If not given, you'll be prompted for it.\n" +
-            "\t-P|--password <password for console user> Password for the user.\n" +
+            "\t-P|--password <password for bridge user> Password for the user.\n" +
             "\t\tRequired. If not given, you'll prompted for it, what is recommended as giving your password\n" +
             "\t\tin command line will expose it in your shell's history. Password is masked during prompt.\n\n" +
             'options:\n' +
@@ -190,7 +192,7 @@ function showHelp(message) {
  * @returns {*} Null or whatever the callback returns.
  */
 function perform(options, callback){
-    var consoleInstance = new E2EConsole(options.host, options.port, options.user, options.password);
+    var bridgeInstance = new E2EBridge(options.host, options.port, options.user, options.password);
     switch(options.operation){
         case 'kill':
             if(options.nodejs){
@@ -198,15 +200,15 @@ function perform(options, callback){
             }
         case 'start':
         case 'stop':
-            consoleInstance.setServiceStatus(options.operation, options.service, (options.nodejs ? 'node' : 'bridge'), options.node, callback);
+            bridgeInstance.setServiceStatus(options.operation, options.service, (options.nodejs ? NODE_SERVICE_TYPE : XUML_SERVICE_TYPE), options.node, callback);
             return null;
 
         case 'remove':
-            consoleInstance.removeService(options.service, (options.nodejs ? 'node' : 'bridge'), options.node, callback);
+            bridgeInstance.removeService(options.service, (options.nodejs ? NODE_SERVICE_TYPE : XUML_SERVICE_TYPE), options.node, callback);
             return null;
 
         case 'deploy':
-            consoleInstance.deployService(options.file, options.options, callback);
+            bridgeInstance.deployService(options.file, options.options, callback);
             return null;
     }
     // Should not happen
