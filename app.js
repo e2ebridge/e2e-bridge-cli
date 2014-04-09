@@ -37,9 +37,14 @@ if( argv._.length < 1 ) {
             case 'start':
             case 'stop':
             case 'kill':
-            case 'deploy':
             case 'remove':
                 if(argv._.length != 2) {
+                    incorrectNbOfArgs();
+                }
+                requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
+                break;
+            case 'deploy':
+                if(argv._.length > 2) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
@@ -59,7 +64,7 @@ if( argv._.length < 1 ) {
     })();
 
     if(settings['operation'] === 'deploy'){
-        settings['file'] = path.resolve(process.cwd(), '' + argv._[1]);
+        settings['file'] = path.resolve(process.cwd(), '' + (argv._[1] || '.'));
     } else if(settings['operation'] === 'pack'){
         settings['directory'] = path.resolve(process.cwd(), '' + (argv._[1] || '.'));
         settings['output'] = (argv._[2]) ? path.resolve(process.cwd(), '' + argv._[2]) : path.resolve(settings['directory'], 'repository.rep');

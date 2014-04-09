@@ -37,8 +37,10 @@ $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 ```
 
 To deploy a service:
+- If path to repository is a directory it will be packed and published
+- If path to repository is omitted the current directory is used
 ``` bash
-$ e2ebridge deploy ${path/to/repository} [settings] [-o options]
+$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
 ```
 
 To kill a xUML service:
