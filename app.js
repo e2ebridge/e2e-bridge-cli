@@ -15,29 +15,54 @@ if(argv['help']) {
 }
 
 var settings = {};
+var requiredProp = {};
 
-if( argv._.length != 2) {
+function incorrectNbOfArgs(){
     showHelp('Incorrect number of arguments');
     process.exit(1);
+}
+
+function unknownOp(op){
+    showHelp('Unknown operation "' + op + '"');
+    process.exit(1);
+}
+
+if( argv._.length < 1 ) {
+    incorrectNbOfArgs();
 } else {
     (function(){
         var value = ('' + argv._[0]).toLowerCase();
-        var result = ['start', 'stop', 'kill', 'deploy', 'remove'].some(function(element){
-            if(element === value){
-                settings['operation'] = element;
-                return true;
-            }
-            return false;
-        });
 
-        if( !result){
-            showHelp('Unknown operation "' + argv._[0] + '"');
-            process.exit(1);
+        switch(value){
+            case 'start':
+            case 'stop':
+            case 'kill':
+            case 'deploy':
+            case 'remove':
+                if(argv._.length != 2) {
+                    incorrectNbOfArgs();
+                }
+                requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
+                break;
+            case 'pack':
+                if(argv._.length > 3) {
+                    incorrectNbOfArgs();
+                }
+                break;
+            default :
+                unknownOp(argv._[0]);
+                break;
+
         }
+
+        settings['operation'] = value;
     })();
 
     if(settings['operation'] === 'deploy'){
         settings['file'] = path.resolve(process.cwd(), '' + argv._[1]);
+    } else if(settings['operation'] === 'pack'){
+        settings['directory'] = path.resolve(process.cwd(), '' + (argv._[1] || '.'));
+        settings['output'] = (argv._[2]) ? path.resolve(process.cwd(), '' + argv._[2]) : path.resolve(settings['directory'], 'repository.rep');
     } else {
         settings['service'] = '' + argv._[1];
     }
@@ -112,7 +137,7 @@ prompt.delimiter = ' ';
 
 // Ask user for missing required options.
 // The more convienient prompt#addProperties API is broken
-prompt.start().get({ properties: { user: { required: true }, password: { required: true, hidden: true } } }, function (err, result) {
+prompt.start().get({ properties: requiredProp }, function (err, result) {
 
     // if all options given on command line, we get the original object as error. From my point of view it's stupid
     // but we have to deal with it.
@@ -209,6 +234,10 @@ function perform(options, callback){
 
         case 'deploy':
             bridgeInstance.deployService(options.file, options.options, callback);
+            return null;
+
+        case 'pack':
+            E2EBridge.pack(options.directory, options.output, callback);
             return null;
     }
     // Should not happen

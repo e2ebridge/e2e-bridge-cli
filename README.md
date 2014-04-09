@@ -5,6 +5,7 @@ A command-line interface to E2E Bridge based on Node.js
 ## Features
 
 * xUML and Node.js Services
+    * pack
     * deploy
     * remove
     * start
@@ -27,7 +28,15 @@ To start, stop or remove a (Node.js) service:
 $ e2ebridge start|stop|remove ${ServiceName} [-N|--nodejs] [settings]
 ```
 
-To deploy a service:  
+To pack a service:
+- A .e2eignore file can be used to ignore some files when packing.
+- If path to directory is omitted the current directory is used.
+- If path to repository is omitted a "repository.rep" file is created is the directory.
+``` bash
+$ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
+```
+
+To deploy a service:
 ``` bash
 $ e2ebridge deploy ${path/to/repository} [settings] [-o options]
 ```
