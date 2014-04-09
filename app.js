@@ -193,7 +193,8 @@ function showHelp(message) {
         'Usage:\n' +
         'start|stop|remove ${ServiceName} [-N|--nodejs] [settings]\n' +
         'kill ${ServiceName} [settings]\n' +
-        'deploy ${path/to/repository} [settings] [-o options]\n'+
+        'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
+        'pack [${path/to/directory}] [${path/to/repository}]\n'+
         '--help\n\n' +
             'settings:\n' +
             '\t-h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.\n' +
