@@ -1,11 +1,11 @@
 {
   "name": "e2e-bridge-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "start": "node app.js"
   },
   "bin": {
-      "e2ebridge": "./app.js"
+    "e2ebridge": "./app.js"
   },
   "dependencies": {
     "e2e-bridge-lib": "~0.2.0",
