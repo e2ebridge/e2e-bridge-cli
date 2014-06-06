@@ -5,13 +5,14 @@ A command-line interface to E2E Bridge based on Node.js
 ## Features
 
 * xUML and Node.js Services
-    * pack
     * deploy
     * remove
     * start
     * stop
 * xUML Services only
     * kill
+* Node.js Services only
+    * pack
 * Can be installed as global utility
 
 ## Installation
@@ -31,7 +32,7 @@ $ e2ebridge start|stop|remove ${ServiceName} [-N|--nodejs] [settings]
 To pack a service:
 - A .e2eignore file can be used to ignore some files when packing.
 - If path to directory is omitted the current directory is used.
-- If path to repository is omitted a "repository.rep" file is created is the directory.
+- If path to repository is omitted a "<package.name>-<package.version>.zip" file is created in the directory. If package information is missing an error will be thrown.
 ``` bash
 $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 ```
