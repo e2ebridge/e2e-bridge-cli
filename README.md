@@ -4,7 +4,7 @@ A command-line interface to E2E Bridge based on Node.js
 
 ## Features
 
-* xUML and Node.js Services
+* xUML, Node.js or Java Services
     * deploy
     * remove
     * start
@@ -24,12 +24,12 @@ Global installation may require additional privileges.
 ## Usage
 This guide assumes global installation. If you installed locally, replace ``` e2ebridge ``` with ``` node path/to/app.js ``` (or, on linux ``` path/to/app.js ```).
 
-To start, stop or remove a (Node.js) service:  
+To start, stop or remove a xUML, Node.js (-N) or Java (-j) service:
 ``` bash
-$ e2ebridge start|stop|remove ${ServiceName} [-N|--nodejs] [settings]
+$ e2ebridge start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]
 ```
 
-To pack a service:
+To pack a Node.js service:
 - A .e2eignore file can be used to ignore some files when packing.
 - If path to directory is omitted the current directory is used.
 - If path to repository is omitted a "<package.name>-<package.version>.zip" file is created in the directory. If package information is missing an error will be thrown.
@@ -38,8 +38,8 @@ $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 ```
 
 To deploy a service:
-- If path to repository is a directory it will be packed and published
-- If path to repository is omitted the current directory is used
+- If path to repository is a directory it will be packed and published. Only useful for Node.js services.
+- If path to repository is omitted the current directory is used. Only useful for Node.js services.
 ``` bash
 $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
 ```
@@ -73,6 +73,7 @@ A comma-separated list of deployment options.
 
 ### Other switches:
 * -N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
+* -j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
 
 ## Usage examples
 * Deploy *PurchaseOrderExample* to localhost  

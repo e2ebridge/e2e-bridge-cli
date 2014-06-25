@@ -8,6 +8,7 @@ var path = require('path');
 
 /** @const */ var XUML_SERVICE_TYPE = 'xUML';
 /** @const */ var NODE_SERVICE_TYPE = 'node';
+/** @const */ var JAVA_SERVICE_TYPE = 'java';
 
 if(argv['help']) {
     showHelp();
@@ -104,6 +105,10 @@ if( argv['N'] || argv['nodejs']){
     settings['nodejs'] = true;
 }
 
+if( argv['j'] || argv['java']){
+    settings['java'] = true;
+}
+
 
 // Deployment options
 settings['options'] = {
@@ -135,6 +140,10 @@ if( settings['operation'] === 'deploy'){
                 });
             }
         })();
+    }
+} else {
+    if (settings['nodejs'] && settings['java']) {
+        showHelp('You must not use Node.js and Java mode simultaneously.')
     }
 }
 
@@ -193,7 +202,7 @@ function showHelp(message) {
 
     process.stdout.write(
         'Usage:\n' +
-        'start|stop|remove ${ServiceName} [-N|--nodejs] [settings]\n' +
+        'start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]\n' +
         'kill ${ServiceName} [settings]\n' +
         'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
         'pack [${path/to/directory}] [${path/to/repository}]\n'+
@@ -213,7 +222,8 @@ function showHelp(message) {
             '\t\toverwrite: Overwrite existing service if one already exists.\n' +
             '\t\tsettings: Overwrite settings and preferences too.\n\n' +
             'Other:\n' +
-            '\t-N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".\n\n\n'
+            '\t-N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".\n\n\n' +
+            '\t-j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".\n\n\n'
     );
 }
 
@@ -233,11 +243,11 @@ function perform(options, callback){
             }
         case 'start':
         case 'stop':
-            bridgeInstance.setServiceStatus(options.operation, options.service, (options.nodejs ? NODE_SERVICE_TYPE : XUML_SERVICE_TYPE), options.node, callback);
+            bridgeInstance.setServiceStatus(options.operation, options.service, getMode(options), options.node, callback);
             return null;
 
         case 'remove':
-            bridgeInstance.removeService(options.service, (options.nodejs ? NODE_SERVICE_TYPE : XUML_SERVICE_TYPE), options.node, callback);
+            bridgeInstance.removeService(options.service, getMode(options), options.node, callback);
             return null;
 
         case 'deploy':
@@ -253,5 +263,9 @@ function perform(options, callback){
         errorType: 'BUG',
         error: '"perform" fed with incorrect operation. Please report the problem. Please attach your command line invocation.'
     });
+}
+
+function getMode(options) {
+    return options.nodejs ? NODE_SERVICE_TYPE : options.java ? JAVA_SERVICE_TYPE : XUML_SERVICE_TYPE;
 }
 
