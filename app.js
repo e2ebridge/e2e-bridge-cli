@@ -174,8 +174,8 @@ prompt.start().get({ properties: requiredProp }, function (err, result) {
             process.stdout.write('FAILED\n'.red);
             if(error.errorType) {
                 process.stderr.write('Type: ' + error.errorType + '\n');
-                if(error.error && error.error.Message) {
-                    process.stderr.write('Message: ' + error.error.Message + '\n');
+                if(error.error && error.error.message) {
+                    process.stderr.write('Message: ' + error.error.message + '\n');
                 } else {
                     process.stderr.write(util.inspect(error, {depth:3}));
                 }
