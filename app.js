@@ -105,10 +105,12 @@ if( argv['N'] || argv['nodejs']){
     settings['nodejs'] = true;
 }
 
+settings['git'] = argv['g'] || argv['git'];
+settings['shrinkwrap'] = argv['s'] || argv['shrinkwrap'];
+
 if( argv['j'] || argv['java']){
     settings['java'] = true;
 }
-
 
 // Deployment options
 settings['options'] = {
@@ -168,24 +170,28 @@ prompt.start().get({ properties: requiredProp }, function (err, result) {
 
     process.stdout.write('Working, please wait.\n');
 
-    perform(settings, function(error){
-        process.stdout.write([settings.operation, ' ', settings.service || settings.file, ': '].join(''));
-        if(error){
-            process.stdout.write('FAILED\n'.red);
-            if(error.errorType) {
-                process.stderr.write('Type: ' + error.errorType + '\n');
-                if(error.error && error.error.message) {
-                    process.stderr.write('Message: ' + error.error.message + '\n');
+    perform(settings, function (error) {
+        var out = [settings.operation, ' ', settings.service || settings.file, ': '].join('');
+        var err = '';
+        if (error) {
+            out += 'FAILED\n'.red;
+            if (error.errorType) {
+                err += 'Type: ' + error.errorType + '\n';
+                if (error.error && error.error.message) {
+                    err += 'Message: ' + error.error.message;
                 } else {
-                    process.stderr.write(util.inspect(error, {depth:3}));
+                    err += util.inspect(error, {depth:3});
                 }
             } else {
-                process.stderr.write(util.inspect(error, {depth:3}));
+                err += util.inspect(error, {depth:3});
             }
-            process.stderr.write('\n');
+            err += '\n';
+            process.stdout.write(out);
+            process.stderr.write(err);
             process.exit(2);
         } else {
-            process.stdout.write('SUCCESS\n'.green);
+            out += 'SUCCESS\n'.green;
+            process.stdout.write(out);
             process.exit(0);
         }
     });
@@ -205,7 +211,7 @@ function showHelp(message) {
         'start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]\n' +
         'kill ${ServiceName} [settings]\n' +
         'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
-        'pack [${path/to/directory}] [${path/to/repository}]\n'+
+        'pack [${path/to/directory}] [${path/to/repository}] [-g|--git] [-s|--shrinkwrap]\n'+
         '--help\n\n' +
             'settings:\n' +
             '\t-h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.\n' +
@@ -223,7 +229,10 @@ function showHelp(message) {
             '\t\tsettings: Overwrite settings and preferences too.\n\n' +
             'Other:\n' +
             '\t-N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".\n\n\n' +
-            '\t-j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".\n\n\n'
+            '\t-j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".\n\n\n' +
+            '\t-g|--git Use "git archive" for building the repository. This is ignored for all commands but "pack".\n\n\n' +
+            '\t-s|--shrinkwrap Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".\n\n\n'
+
     );
 }
 
@@ -255,7 +264,7 @@ function perform(options, callback){
             return null;
 
         case 'pack':
-            E2EBridge.pack(options.directory, options.output, callback);
+            E2EBridge.pack(options.directory, options, callback);
             return null;
     }
     // Should not happen

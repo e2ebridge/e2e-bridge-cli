@@ -74,6 +74,8 @@ A comma-separated list of deployment options.
 ### Other switches:
 * -N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
 * -j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
+* -g|--git Use "git archive" for building the repository. This is ignored for all commands but "pack".
+* -s|--shrinkwrap Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 
 ## Usage examples
 * Deploy *PurchaseOrderExample* to localhost  
