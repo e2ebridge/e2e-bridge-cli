@@ -1,6 +1,6 @@
 {
   "name": "e2e-bridge-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "start": "node app.js"
   },
@@ -8,7 +8,7 @@
     "e2ebridge": "./app.js"
   },
   "dependencies": {
-    "e2e-bridge-lib": "~0.3.0",
+    "e2e-bridge-lib": "^0.4.0",
     "minimist": "0.0.8",
     "prompt": "~0.2.12"
   },
@@ -19,7 +19,7 @@
   "maintainers": [
     {
       "name": "Jakub Zakrzewski",
-      "email": "jzakrzewski@e2e.ch"
+      "email": "jzakrzewski@e2ebridge.ch"
     }
   ],
   "license": "MIT",
