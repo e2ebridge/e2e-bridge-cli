@@ -114,9 +114,11 @@ if( argv['j'] || argv['java']){
 
 // Deployment options
 settings['options'] = {
-    startup:            false,
-    overwrite:          false,
-    overwrite_settings: false
+    startup:                 false,
+    overwrite:               false,
+    overwrite_settings:      false,
+    npm_install:             false,
+    npm_install_run_scripts: false
 };
 
 if( settings['operation'] === 'deploy'){
@@ -134,6 +136,12 @@ if( settings['operation'] === 'deploy'){
                             break;
                         case 'settings':
                             settings['options'].overwrite_settings = true;
+                            break;
+                        case 'npm_install_run_scripts':
+                            settings['options'].npm_install_run_scripts = true;
+                        //noinspection FallThroughInSwitchStatementJS
+                        case 'npm_install':
+                            settings['options'].npm_install = true;
                             break;
                         default:
                             showHelp('Unknown option "' + option + '".');
@@ -226,7 +234,10 @@ function showHelp(message) {
             '\tstartup|overwrite|settings Multiple options can be separated by comma, like: "-o startup,overwrite"+\n' +
             '\t\tstartup: Launch service after deployment.\n' +
             '\t\toverwrite: Overwrite existing service if one already exists.\n' +
-            '\t\tsettings: Overwrite settings and preferences too.\n\n' +
+            '\t\tsettings: Overwrite settings and preferences too.\n' +
+            "\t\tnpm_install: Run 'npm install' (Applies to Node.js services only).\n" +
+            "\t\tnpm_install_run_scripts: Run 'npm install' (running scripts too) (Applies to Node.js services" +
+            " only).\n\n" +
             'Other:\n' +
             '\t-N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".\n\n\n' +
             '\t-j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".\n\n\n' +

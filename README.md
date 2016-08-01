@@ -70,6 +70,7 @@ A comma-separated list of deployment options.
 * startup: Launch service after deployment.
 * overwrite: Overwrite existing service if one already exists.
 * settings: Overwrite settings and preferences too.
+* npm_install: Run 'npm install' (applies to Node.js services only)
 
 ### Other switches:
 * -N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
