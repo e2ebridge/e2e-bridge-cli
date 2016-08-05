@@ -1,6 +1,6 @@
 {
   "name": "e2e-bridge-cli",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "scripts": {
     "start": "node app.js"
   },
