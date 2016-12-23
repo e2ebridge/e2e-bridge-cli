@@ -127,7 +127,8 @@ if( settings['operation'] === 'deploy'){
             var options = (argv['o'] || argv['option'] || argv['options']).split(',');
             if(options.length){
                 options.forEach(function(option){
-                    switch(option){
+                    var o = option.split('=');
+                    switch(o[0]){
                         case 'startup' :
                             settings['options'].startup = true;
                             break;
@@ -142,6 +143,9 @@ if( settings['operation'] === 'deploy'){
                         //noinspection FallThroughInSwitchStatementJS
                         case 'npm_install':
                             settings['options'].npm_install = true;
+                            break;
+                        case 'instance_name':
+                            settings['options'].instance_name = o[1];
                             break;
                         default:
                             showHelp('Unknown option "' + option + '".');
