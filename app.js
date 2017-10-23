@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var E2EBridge = require('e2e-bridge-lib');
 var util = require('util');
 var argv = require('minimist')(process.argv.slice(2));
@@ -28,18 +30,21 @@ function unknownOp(op){
     process.exit(1);
 }
 
-if( argv._.length < 1 ) {
+let positionalArgs = argv._.slice();
+
+if( positionalArgs.length < 1 ) {
     incorrectNbOfArgs();
 } else {
     (function(){
-        var value = ('' + argv._[0]).toLowerCase();
+        var value = ('' + positionalArgs[0]).toLowerCase();
 
         switch(value){
             case 'start':
             case 'stop':
             case 'kill':
             case 'remove':
-                if(argv._.length != 2) {
+            case 'preferences':
+                if(positionalArgs.length !== 2) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
@@ -51,28 +56,46 @@ if( argv._.length < 1 ) {
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
                 break;
             case 'pack':
-                if(argv._.length > 3) {
+                if(positionalArgs.length > 3) {
                     incorrectNbOfArgs();
                 }
                 break;
             default :
-                unknownOp(argv._[0]);
+                unknownOp(positionalArgs[0]);
                 break;
 
         }
 
         settings['operation'] = value;
+        positionalArgs.shift();
     })();
 
     if(settings['operation'] === 'deploy'){
-        settings['file'] = path.resolve(process.cwd(), '' + (argv._[1] || '.'));
+        settings['file'] = path.resolve(process.cwd(), '' + (positionalArgs.shift() || '.'));
     } else if(settings['operation'] === 'pack'){
-        settings['directory'] = path.resolve(process.cwd(), '' + (argv._[1] || '.'));
-        settings['output'] = (argv._[2])
-            ? path.resolve(process.cwd(), '' + argv._[2])
+        settings['directory'] = path.resolve(process.cwd(), '' + (positionalArgs.shift() || '.'));
+
+        let out = positionalArgs.shift();
+        settings['output'] = out
+            ? path.resolve(process.cwd(), '' + out)
             : null;
     } else {
-        settings['service'] = '' + argv._[1];
+        settings['service'] = '' + positionalArgs.shift();
+    }
+
+    if(settings['operation'] === 'deploy' || settings['operation'] === 'preferences') {
+        // scan for properties one may want to set
+        if(argv['pref']) {
+            let preferences = Object.assign({}, argv['pref']);
+            Object.keys(preferences).forEach(function(k) {
+                if(preferences[k] === 'true') {
+                    preferences[k] = true;
+                } else if(preferences[k] === 'false'){
+                    preferences[k] = false;
+                }
+            });
+            settings['preferences'] = preferences;
+        }
     }
 }
 
@@ -166,7 +189,7 @@ prompt.message = "Bridge";
 prompt.delimiter = ' ';
 
 // Ask user for missing required options.
-// The more convienient prompt#addProperties API is broken
+// The more convenient prompt#addProperties API is broken
 prompt.start().get({ properties: requiredProp }, function (err, result) {
 
     // if all options given on command line, we get the original object as error. From my point of view it's stupid
@@ -182,7 +205,7 @@ prompt.start().get({ properties: requiredProp }, function (err, result) {
 
     process.stdout.write('Working, please wait.\n');
 
-    perform(settings, function (error) {
+    perform(settings, function (error, result) {
         var out = [settings.operation, ' ', settings.service || settings.file, ': '].join('');
         var err = '';
         if (error) {
@@ -204,6 +227,9 @@ prompt.start().get({ properties: requiredProp }, function (err, result) {
         } else {
             out += 'SUCCESS\n'.green;
             process.stdout.write(out);
+            if(result) {
+                process.stdout.write(util.inspect(result, {depth: 3}) + '\n');
+            }
             process.exit(0);
         }
     });
@@ -222,8 +248,9 @@ function showHelp(message) {
         'Usage:\n' +
         'start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]\n' +
         'kill ${ServiceName} [settings]\n' +
-        'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
+        'deploy [${path/to/repository}|${path/to/directory}] [--pref.${PreferenceName}=${PreferenceValue}]... [settings] [-o options]\n'+
         'pack [${path/to/directory}] [${path/to/repository}] [-g|--git] [-s|--shrinkwrap]\n'+
+        'preferences ${ServiceName} [--pref.${PreferenceName}=${PreferenceValue}]... [settings]\n' +
         '--help\n\n' +
             'settings:\n' +
             '\t-h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.\n' +
@@ -275,11 +302,26 @@ function perform(options, callback){
             return null;
 
         case 'deploy':
-            bridgeInstance.deployService(options.file, options.options, callback);
+            bridgeInstance.deployService(options.file, options.options, function(error) {
+                if(error) {
+                    return callback(error);
+                }
+                if(options.preferences) {
+                    bridgeInstance.setServicePreferences(options.service, getMode(options), options.preferences, callback);
+                }
+            });
             return null;
 
         case 'pack':
             E2EBridge.pack(options.directory, options, callback);
+            return null;
+
+        case 'preferences':
+            if(options.preferences) {
+                bridgeInstance.setServicePreferences(options.service, getMode(options), options.preferences, callback);
+            } else {
+                bridgeInstance.getServicePreferences(options.service, getMode(options), callback);
+            }
             return null;
     }
     // Should not happen

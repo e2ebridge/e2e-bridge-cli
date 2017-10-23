@@ -9,6 +9,7 @@ A command-line interface to E2E Bridge based on Node.js
     * remove
     * start
     * stop
+    * view / set service preferences
 * xUML Services only
     * kill
 * Node.js Services only
@@ -40,13 +41,20 @@ $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 To deploy a service:
 - If path to repository is a directory it will be packed and published. Only useful for Node.js services.
 - If path to repository is omitted the current directory is used. Only useful for Node.js services.
+- If ```--pref.*``` arguments are given, service preferences will be set (see [Service Preferences](#service-preferences)).
 ``` bash
-$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
+$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [--pref.${PreferenceName}=${PreferenceValue}]... [settings] [-o options]
 ```
 
 To kill a xUML service:
 ``` bash
 $ e2ebridge kill ${ServiceName} [settings]
+```
+
+To view / set service preferences:
+- If no ```--pref.*``` arguments are given, the current service preferences are displayed
+``` bash
+$ e2ebridge preferences ${ServiceName} [--pref.${PreferenceName}=${PreferenceValue}]... [settings]
 ```
 
 To get usage help:  
@@ -80,6 +88,24 @@ A comma-separated list of deployment options.
 * -g|--git Use "git archive" for building the repository. This is ignored for all commands but "pack".
 * -s|--shrinkwrap Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 
+### Service Prefrences
+Currently the Bridge supports following preferences:
+- All services:
+  * automaticStartup : boolean
+  * automaticRestart : boolean
+  * owner : string \[readonly\]
+- xUML services:
+  * bridgeServerLogLevel : string \[None, Fatal, Error, Warning, Info, Debug\]
+  * transactionLogLevel  : string \[None, Custom, Service, IOExternal, IOInternal\]
+  * transactionLogRotInterval : \[HOURLY, DAILY\]
+- Node.js and Java services:
+  * minimumUptimeInSeconds : integer
+  * uiUrl: string
+  * uiTabTitle : string
+- Java services:
+  * remoteDebugPort : integer
+
+
 ## Usage examples
 * Deploy *PurchaseOrderExample* to localhost  
 ``` bash
@@ -99,4 +125,9 @@ $ e2ebridge start PurchaseOrderExample -u admin -h devserver.my.org
 * Start myNodeServie on some development server (a Node.js service).   
 ``` bash
 $ e2ebridge start myNodeService -u admin -h devserver.my.org -N
+```
+
+* Set automatic startup of *PurchaseOrderExample* on some development server.
+``` bash
+$ e2ebridge preferences PurchaseOrderExample --pref.automaticStartup=true -u admin -h devserver.my.org
 ```
