@@ -41,9 +41,8 @@ $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 To deploy a service:
 - If path to repository is a directory it will be packed and published. Only useful for Node.js services.
 - If path to repository is omitted the current directory is used. Only useful for Node.js services.
-- If ```--pref.*``` arguments are given, service preferences will be set (see [Service Preferences](#service-preferences)).
 ``` bash
-$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [--pref.${PreferenceName}=${PreferenceValue}]... [settings] [-o options]
+$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
 ```
 
 To kill a xUML service:

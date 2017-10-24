@@ -83,7 +83,7 @@ if( positionalArgs.length < 1 ) {
         settings['service'] = '' + positionalArgs.shift();
     }
 
-    if(settings['operation'] === 'deploy' || settings['operation'] === 'preferences') {
+    if(settings['operation'] === 'preferences') {
         // scan for properties one may want to set
         if(argv['pref']) {
             let preferences = Object.assign({}, argv['pref']);
@@ -248,7 +248,7 @@ function showHelp(message) {
         'Usage:\n' +
         'start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]\n' +
         'kill ${ServiceName} [settings]\n' +
-        'deploy [${path/to/repository}|${path/to/directory}] [--pref.${PreferenceName}=${PreferenceValue}]... [settings] [-o options]\n'+
+        'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
         'pack [${path/to/directory}] [${path/to/repository}] [-g|--git] [-s|--shrinkwrap]\n'+
         'preferences ${ServiceName} [--pref.${PreferenceName}=${PreferenceValue}]... [settings]\n' +
         '--help\n\n' +
@@ -302,14 +302,7 @@ function perform(options, callback){
             return null;
 
         case 'deploy':
-            bridgeInstance.deployService(options.file, options.options, function(error) {
-                if(error) {
-                    return callback(error);
-                }
-                if(options.preferences) {
-                    bridgeInstance.setServicePreferences(options.service, getMode(options), options.preferences, callback);
-                }
-            });
+            bridgeInstance.deployService(options.file, options.options, callback);
             return null;
 
         case 'pack':
