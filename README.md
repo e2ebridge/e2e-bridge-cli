@@ -53,7 +53,7 @@ $ e2ebridge kill ${ServiceName} [settings]
 To view / set service preferences:
 - If no ```--pref.*``` arguments are given, the current service preferences are displayed
 ``` bash
-$ e2ebridge preferences ${ServiceName} [--pref.${PreferenceName}=${PreferenceValue}]... [settings]
+$ e2ebridge preferences ${ServiceName} [[-N|--nodejs]|[-j|--java]] [--pref.${PreferenceName}=${PreferenceValue}]... [settings]
 ```
 
 To get usage help:  
