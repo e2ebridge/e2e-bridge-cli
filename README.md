@@ -10,10 +10,13 @@ A command-line interface to E2E Bridge based on Node.js
     * start
     * stop
     * view / set service preferences
+	
 * xUML Services only
     * kill
+	
 * Node.js Services only
     * pack
+	
 * Can be installed as global utility
 
 ## Installation
@@ -23,7 +26,7 @@ $ npm install [-g] e2e-bridge-cli
 Global installation may require additional privileges.
 
 ## Usage
-This guide assumes global installation. If you installed locally, replace ``` e2ebridge ``` with ``` node path/to/app.js ``` (or, on linux ``` path/to/app.js ```).
+This guide assumes global installation. If you installed locally, replace `e2ebridge` with `node path/to/app.js` (or, on linux `path/to/app.js`).
 
 To start, stop or remove a xUML, Node.js (-N) or Java (-j) service:
 ``` bash
@@ -45,13 +48,13 @@ To deploy a service:
 $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
 ```
 
-To kill a xUML service:
+To kill an xUML service:
 ``` bash
 $ e2ebridge kill ${ServiceName} [settings]
 ```
 
 To view / set service preferences:
-- If no ```--pref.*``` arguments are given, the current service preferences are displayed
+- If no `--pref.*` arguments are given, the current service preferences are displayed
 ``` bash
 $ e2ebridge preferences ${ServiceName} [[-N|--nodejs]|[-j|--java]] [--pref.${PreferenceName}=${PreferenceValue}]... [settings]
 ```
@@ -61,51 +64,54 @@ To get usage help:
 $ e2ebridge --help
 ```
 
-### settings:
-* -h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.
-* -p|--port <bridge port> The port of the bridge. Defaults to 8080.
-* -n|--node <node name> The name of bridge node. Ignored for deployment. Defaults to ${host}.
-* -u|--user <bridge user> User that has the right to perform operation on bridge.
-		Required. If not given, you'll be prompted for it.
-* -P|--password <password for bridge user> Password for the user.
+### Settings:
+* `-h|--host <FQDN bridge host>` The host, that runs the bridge. Defaults to localhost.
+* `-p|--port <bridge port>` The port of the bridge. Defaults to 8080.
+* `-n|--node <node name>` The name of bridge node. Ignored for deployment. Defaults to ${host}.
+* `-u|--user <bridge user>` User that has the right to perform operation on bridge.
+Required. If not given, you'll be prompted for it.
+* `-P|--password <password for bridge user>` Password for the user.
 Required. If not given, you'll prompted for it, what is recommended as giving your password
 in command line will expose it in your shell's history. Password is masked during prompt.
 
-### options:
+### Options:
 A comma-separated list of deployment options.
 
-* startup: Launch service after deployment.
-* overwrite: Overwrite existing service if one already exists.
-* settings: Overwrite settings and preferences too.
-* npm_install: Run 'npm install --ignore-scripts' (applies to Node.js services only)
-* npm_install_run_scripts: Run 'npm install' (applies to Node.js services only)
-* instance_name=\<instance name\>: Choose a different instance name  (applies to Node.js services only)
+* **startup**: Launch service after deployment.
+* **overwrite**: Overwrite existing service if one already exists.
+* **settings**: Overwrite settings and preferences too.
+* **npm_install**: Run 'npm install --ignore-scripts' (applies to Node.js services only)
+* **npm_install_run_scripts**: Run 'npm install' (applies to Node.js services only)
+* **instance_name=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
 
-### Other switches:
-* -N|--nodejs Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
-* -j|--java Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
-* -g|--git Use "git archive" for building the repository. This is ignored for all commands but "pack".
-* -s|--shrinkwrap Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
+### Other Switches:
+* `-N|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
+* `-j|--java` Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
+* `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
+* `-s|--shrinkwrap` Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 
-### Service Prefrences
+### Service Preferences:
 Currently the Bridge supports following preferences:
 - All services:
   * automaticStartup : boolean
   * automaticRestart : boolean
   * owner : string \[readonly\]
+  
 - xUML services:
   * bridgeServerLogLevel : string \[None, Fatal, Error, Warning, Info, Debug\]
   * transactionLogLevel  : string \[None, Custom, Service, IOExternal, IOInternal\]
   * transactionLogRotInterval : \[HOURLY, DAILY\]
+  
 - Node.js and Java services:
   * minimumUptimeInSeconds : integer
   * uiUrl: string
   * uiTabTitle : string
+  
 - Java services:
   * remoteDebugPort : integer
 
 
-## Usage examples
+## Usage Examples
 * Deploy *PurchaseOrderExample* to localhost  
 ``` bash
 $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
