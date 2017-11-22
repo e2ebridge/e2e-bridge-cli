@@ -43,12 +43,12 @@ if( positionalArgs.length < 1 ) {
             case 'stop':
             case 'kill':
             case 'remove':
-            case 'preferences':
                 if(positionalArgs.length !== 2) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
                 break;
+
             case 'deploy':
                 if(argv._.length > 2) {
                     incorrectNbOfArgs();
@@ -59,6 +59,13 @@ if( positionalArgs.length < 1 ) {
                 if(positionalArgs.length > 3) {
                     incorrectNbOfArgs();
                 }
+                break;
+            case 'settings':
+            case 'preferences':
+                if(argv._.length < 2 || (argv._.length - 2) % 3 != 0) {
+                    incorrectNbOfArgs();
+                }
+                requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
                 break;
             default :
                 unknownOp(positionalArgs[0]);
@@ -85,16 +92,41 @@ if( positionalArgs.length < 1 ) {
 
     if(settings['operation'] === 'preferences') {
         // scan for properties one may want to set
-        if(argv['pref']) {
-            let preferences = Object.assign({}, argv['pref']);
-            Object.keys(preferences).forEach(function(k) {
-                if(preferences[k] === 'true') {
-                    preferences[k] = true;
-                } else if(preferences[k] === 'false'){
-                    preferences[k] = false;
+        if (positionalArgs.indexOf('pref') > -1 && positionalArgs.length >= 3) {
+            var nPref = {};
+            for (var i=0; i<positionalArgs.length;i++) {
+                if (positionalArgs[i] === 'pref') {
+                    let setName = positionalArgs[i + 1];
+                    let setValue = positionalArgs[i + 2];
+
+                    if (setValue === 'true') {
+                        nPref[setName] = true;
+                    } else if (setValue === 'false') {
+                        nPref[setName] = false;
+                    } else {
+                        nPref[setName] = setValue;
+                    }
+                    i += 2;
                 }
-            });
-            settings['preferences'] = preferences;
+            }
+            settings['preferences'] = nPref;
+        }
+    }
+
+
+    if(settings['operation'] ==='settings') {
+        // scan for settings that should be changed
+        if (positionalArgs.indexOf('set') > -1 && positionalArgs.length >= 3) {
+            var nSet = {};
+            for (var i=0; i<positionalArgs.length;i++) {
+                if (positionalArgs[i] === 'set') {
+                    let setName = positionalArgs[i + 1];
+                    let setValue = positionalArgs[i + 2];
+                    nSet[setName] = setValue;
+                    i += 2;
+                }
+            }
+            settings['settings'] = nSet;
         }
     }
 }
@@ -250,7 +282,8 @@ function showHelp(message) {
         'kill ${ServiceName} [settings]\n' +
         'deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]\n'+
         'pack [${path/to/directory}] [${path/to/repository}] [-g|--git] [-s|--shrinkwrap]\n'+
-        'preferences ${ServiceName} [--pref.${PreferenceName}=${PreferenceValue}]... [settings]\n' +
+        'preferences ${ServiceName} [pref ${PreferenceName} ${PreferenceValue}]... [settings]\n' +
+        'settings ${ServiceName} [set ${SettingsName} ${SettingValue}]... [settings]\n' +
         '--help\n\n' +
             'settings:\n' +
             '\t-h|--host <FQDN bridge host> The host, that runs the bridge. Defaults to localhost.\n' +
@@ -314,6 +347,13 @@ function perform(options, callback){
                 bridgeInstance.setServicePreferences(options.service, getMode(options), options.preferences, callback);
             } else {
                 bridgeInstance.getServicePreferences(options.service, getMode(options), callback);
+            }
+            return null;
+        case 'settings':
+            if(options.settings) {
+                bridgeInstance.setServiceSettings(options.service, getMode(options), options.settings, callback);
+            } else {
+                bridgeInstance.getServiceSettings(options.service, getMode(options), callback);
             }
             return null;
     }

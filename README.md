@@ -10,13 +10,14 @@ A command-line interface to E2E Bridge based on Node.js
     * start
     * stop
     * view / set service preferences
-	
+    * view / set service settings
+
 * xUML Services only
     * kill
-	
+
 * Node.js Services only
     * pack
-	
+
 * Can be installed as global utility
 
 ## Installation
@@ -54,9 +55,15 @@ $ e2ebridge kill ${ServiceName} [settings]
 ```
 
 To view / set service preferences:
-- If no `--pref.*` arguments are given, the current service preferences are displayed
+- If no `pref * *` arguments are given, the current service preferences are displayed
 ``` bash
-$ e2ebridge preferences ${ServiceName} [[-N|--nodejs]|[-j|--java]] [--pref.${PreferenceName}=${PreferenceValue}]... [settings]
+$ e2ebridge preferences ${ServiceName} [[-N|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
+```
+
+To view / set service settings:
+- If no `set * *` arguments are given, the current service settings are displayed
+``` bash
+$ e2ebridge settings ${ServiceName} [[-N|--nodejs]|[-j|--java]] [set ${SettingName} ${SettingValue}]... [settings]
 ```
 
 To get usage help:  
@@ -96,17 +103,17 @@ Currently the Bridge supports following preferences:
   * automaticStartup : boolean
   * automaticRestart : boolean
   * owner : string \[readonly\]
-  
+
 - xUML services:
   * bridgeServerLogLevel : string \[None, Fatal, Error, Warning, Info, Debug\]
   * transactionLogLevel  : string \[None, Custom, Service, IOExternal, IOInternal\]
   * transactionLogRotInterval : \[HOURLY, DAILY\]
-  
+
 - Node.js and Java services:
   * minimumUptimeInSeconds : integer
   * uiUrl: string
   * uiTabTitle : string
-  
+
 - Java services:
   * remoteDebugPort : integer
 
@@ -134,5 +141,10 @@ $ e2ebridge start myNodeService -u admin -h devserver.my.org -N
 
 * Set automatic startup of *PurchaseOrderExample* on some development server.
 ``` bash
-$ e2ebridge preferences PurchaseOrderExample --pref.automaticStartup=true -u admin -h devserver.my.org
+$ e2ebridge preferences PurchaseOrderExample pref automaticStartup true -u admin -h devserver.my.org
+```
+
+* Set Setting "global_Settings::Folder Name to move mails in that are skipped" of *PurchaseOrderExample* on some development server.
+``` bash
+$ e2ebridge settings PurchaseOrderExample set "global_Settings::Folder Name to move mails in that are skipped" "SKIPPED" -u admin -h devserver.my.org
 ```
