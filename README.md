@@ -37,7 +37,10 @@ $ e2ebridge start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settin
 To pack a Node.js service:
 - A .e2eignore file can be used to ignore some files when packing.
 - If path to directory is omitted the current directory is used.
-- If path to repository is omitted a "<package.name>-<package.version>.zip" file is created in the directory. If package information is missing an error will be thrown.
+- If path to repository is omitted a "<package.name>-<package.version>.zip" file is created in the current working directory. If package information is missing an error will be thrown.
+- During pack no file should be modified otherwise error "Didn't get expected byte count" can happen.
+  To prevent packing the current package or older packages place them outside the source
+  folder or put package names into .e2eignore.
 ``` bash
 $ e2ebridge pack [${path/to/directory}] [${path/to/repository}]
 ```
