@@ -50,7 +50,7 @@ if( positionalArgs.length < 1 ) {
                 break;
 
             case 'deploy':
-                if(argv._.length > 2) {
+                if(positionalArgs.length > 2) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
@@ -62,7 +62,7 @@ if( positionalArgs.length < 1 ) {
                 break;
             case 'settings':
             case 'preferences':
-                if(argv._.length < 2 || (argv._.length - 2) % 3 != 0) {
+                if(positionalArgs.length < 2 || (positionalArgs.length - 2) % 3 != 0) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
