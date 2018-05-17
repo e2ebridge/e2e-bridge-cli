@@ -2,23 +2,23 @@
 
 'use strict';
 
-var E2EBridge = require('e2e-bridge-lib');
-var util = require('util');
-var argv = require('minimist')(process.argv.slice(2));
-var prompt = require('prompt');
-var path = require('path');
+const E2EBridge = require('e2e-bridge-lib');
+const util = require('util');
+const argv = require('minimist')(process.argv.slice(2));
+const prompt = require('prompt');
+const path = require('path');
 
-/** @const */ var XUML_SERVICE_TYPE = 'xUML';
-/** @const */ var NODE_SERVICE_TYPE = 'node';
-/** @const */ var JAVA_SERVICE_TYPE = 'java';
+const XUML_SERVICE_TYPE = 'xUML';
+const NODE_SERVICE_TYPE = 'node';
+const JAVA_SERVICE_TYPE = 'java';
 
 if(argv['help']) {
     showHelp();
     process.exit(0);
 }
 
-var settings = {};
-var requiredProp = {};
+const settings = {};
+let requiredProp = {};
 
 function incorrectNbOfArgs(){
     showHelp('Incorrect number of arguments');
@@ -36,7 +36,7 @@ if( positionalArgs.length < 1 ) {
     incorrectNbOfArgs();
 } else {
     (function(){
-        var value = ('' + positionalArgs[0]).toLowerCase();
+        const value = ('' + positionalArgs[0]).toLowerCase();
 
         switch(value){
             case 'start':
@@ -93,8 +93,8 @@ if( positionalArgs.length < 1 ) {
     if(settings['operation'] === 'preferences') {
         // scan for properties one may want to set
         if (positionalArgs.indexOf('pref') > -1 && positionalArgs.length >= 3) {
-            var nPref = {};
-            for (var i=0; i<positionalArgs.length;i++) {
+            const nPref = {};
+            for (let i=0; i<positionalArgs.length;i++) {
                 if (positionalArgs[i] === 'pref') {
                     let setName = positionalArgs[i + 1];
                     let setValue = positionalArgs[i + 2];
@@ -117,8 +117,8 @@ if( positionalArgs.length < 1 ) {
     if(settings['operation'] ==='settings') {
         // scan for settings that should be changed
         if (positionalArgs.indexOf('set') > -1 && positionalArgs.length >= 3) {
-            var nSet = {};
-            for (var i=0; i<positionalArgs.length;i++) {
+            const nSet = {};
+            for (let i=0; i<positionalArgs.length; i++) {
                 if (positionalArgs[i] === 'set') {
                     let setName = positionalArgs[i + 1];
                     let setValue = positionalArgs[i + 2];
@@ -144,7 +144,7 @@ settings['node'] =  argv['n'] || argv['node'] || settings['host'];
 
 if( argv['p'] || argv['port']){
     (function(){
-        var port = parseInt(argv['p'] || argv['port']);
+        const port = parseInt(argv['p'] || argv['port']);
         if(isNaN(port)){
             showHelp('Port has to be an integer number.');
             process.exit(1);
@@ -179,10 +179,10 @@ settings['options'] = {
 if( settings['operation'] === 'deploy'){
     if(argv['o'] || argv['option'] || argv['options']){
         (function(){
-            var options = (argv['o'] || argv['option'] || argv['options']).split(',');
+            const options = (argv['o'] || argv['option'] || argv['options']).split(',');
             if(options.length){
                 options.forEach(function(option){
-                    var o = option.split('=');
+                    const o = option.split('=');
                     switch(o[0]){
                         case 'startup' :
                             settings['options'].startup = true;
@@ -238,8 +238,8 @@ prompt.start().get({ properties: requiredProp }, function (err, result) {
     process.stdout.write('Working, please wait.\n');
 
     perform(settings, function (error, result) {
-        var out = [settings.operation, ' ', settings.service || settings.file, ': '].join('');
-        var err = '';
+        let out = [settings.operation, ' ', settings.service || settings.file, ': '].join('');
+        let err = '';
         if (error) {
             out += 'FAILED\n'.red;
             if (error.errorType) {
@@ -319,7 +319,7 @@ function showHelp(message) {
  * @returns {*} Null or whatever the callback returns.
  */
 function perform(options, callback){
-    var bridgeInstance = new E2EBridge(options.host, options.port, options.user, options.password);
+    const bridgeInstance = new E2EBridge(options.host, options.port, options.user, options.password);
     switch(options.operation){
         case 'kill':
             if(options.nodejs){
