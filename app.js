@@ -56,7 +56,7 @@ if( positionalArgs.length < 1 ) {
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
                 break;
             case 'pack':
-                if(positionalArgs.length > 3) {
+                if(positionalArgs.length < 2 || positionalArgs.length > 3) {
                     incorrectNbOfArgs();
                 }
                 break;
@@ -80,7 +80,7 @@ if( positionalArgs.length < 1 ) {
     if(settings['operation'] === 'deploy'){
         settings['file'] = path.resolve('' + (positionalArgs.shift() || '.'));
     } else if(settings['operation'] === 'pack'){
-        settings['directory'] = path.resolve('' + (positionalArgs.shift() || '.'));
+        settings['directory'] = path.resolve('' + positionalArgs.shift());
 
         let out = positionalArgs.shift();
         settings['output'] = out
