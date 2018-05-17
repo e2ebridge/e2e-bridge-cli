@@ -78,13 +78,13 @@ if( positionalArgs.length < 1 ) {
     })();
 
     if(settings['operation'] === 'deploy'){
-        settings['file'] = path.resolve(process.cwd(), '' + (positionalArgs.shift() || '.'));
+        settings['file'] = path.resolve('' + (positionalArgs.shift() || '.'));
     } else if(settings['operation'] === 'pack'){
-        settings['directory'] = path.resolve(process.cwd(), '' + (positionalArgs.shift() || '.'));
+        settings['directory'] = path.resolve('' + (positionalArgs.shift() || '.'));
 
         let out = positionalArgs.shift();
         settings['output'] = out
-            ? path.resolve(process.cwd(), '' + out)
+            ? path.resolve('' + out)
             : null;
     } else {
         settings['service'] = '' + positionalArgs.shift();
