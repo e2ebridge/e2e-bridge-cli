@@ -62,7 +62,7 @@ if( positionalArgs.length < 1 ) {
                 break;
             case 'settings':
             case 'preferences':
-                if(positionalArgs.length < 2 || (positionalArgs.length - 2) % 3 != 0) {
+                if(positionalArgs.length < 2 || (positionalArgs.length - 2) % 3 !== 0) {
                     incorrectNbOfArgs();
                 }
                 requiredProp = { user: { required: true }, password: { required: true, hidden: true } };
@@ -121,8 +121,7 @@ if( positionalArgs.length < 1 ) {
             for (let i=0; i<positionalArgs.length; i++) {
                 if (positionalArgs[i] === 'set') {
                     let setName = positionalArgs[i + 1];
-                    let setValue = positionalArgs[i + 2];
-                    nSet[setName] = setValue;
+                    nSet[setName] = positionalArgs[i + 2];
                     i += 2;
                 }
             }
@@ -320,6 +319,7 @@ function showHelp(message) {
  */
 function perform(options, callback){
     const bridgeInstance = new E2EBridge(options.host, options.port, options.user, options.password);
+    // noinspection FallThroughInSwitchStatementJS
     switch(options.operation){
         case 'kill':
             if(options.nodejs){
