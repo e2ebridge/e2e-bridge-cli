@@ -1,30 +1,35 @@
 
 const lib = require('../lib/lib');
 
-describe("Service settings", function() {
+describe("Service preferences", function() {
 
     it("does nothing for too short input", function() {
-        expect(lib.gatherSettings(['set', 'x'])).toBeUndefined();
+        expect(lib.gatherPreferences(['pref', 'x'])).toBeUndefined();
     });
 
-    it("understands single setting", function() {
-        expect(lib.gatherSettings(['set', 'x', 'y'])).toEqual({ x: 'y' });
+    it("understands single string preference", function() {
+        expect(lib.gatherPreferences(['pref', 'x', 'y'])).toEqual({ x: 'y' });
     });
 
-    it("understands many settings", function() {
-        expect(lib.gatherSettings([
-            'set', 'x', 'y',
-            'set', 'z', 'abrakadabra',
-            'set', 'b', 'c',
-        ])).toEqual({ x: 'y', z: 'abrakadabra', b: 'c' });
+    it("understands single boolean preference", function() {
+        expect(lib.gatherPreferences(['pref', 'x', true])).toEqual({ x: true });
+    });
+
+    it("understands many preferences", function() {
+        expect(lib.gatherPreferences([
+            'pref', 'x', 'y',
+            'pref', 'z', 'abrakadabra',
+            'pref', 'b', true,
+            'pref', 'c', false,
+        ])).toEqual({ x: 'y', z: 'abrakadabra', b: true, c: false });
     });
 
     it("skips garbage", function() {
-        expect(lib.gatherSettings([
+        expect(lib.gatherPreferences([
             'nothing',
-            'set', 'x', 'y',
+            'pref', 'x', 'y',
             'garbage', 'z', 'abrakadabra',
-            'set', 'b', 'c',
+            'pref', 'b', 'c',
         ])).toEqual({ x: 'y', b: 'c' });
     });
 });
