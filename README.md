@@ -5,6 +5,7 @@ A command-line interface to E2E Bridge based on Node.js
 ## Features
 
 * xUML, Node.js or Java Services
+    * list
     * deploy
     * remove
     * start
@@ -78,6 +79,11 @@ $ e2ebridge modelnotes ${ServiceName} [settings]
 To view chosen model notes for xUML service:
 ``` bash
 $ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [settings]
+```
+
+To list services:
+``` bash
+$ e2ebridge services [[-N|--nodejs]|[-j|--java]] [settings]
 ```
 
 To get usage help:  
