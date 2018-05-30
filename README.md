@@ -50,7 +50,7 @@ To deploy a service:
 - If path to repository is a directory it will be packed and published. Only useful for Node.js services.
 - If path to repository is omitted the current directory is used. Only useful for Node.js services.
 ``` bash
-$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o options]
+$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o option]...
 ```
 
 To kill an xUML service:
@@ -96,14 +96,12 @@ Required. If not given, you'll prompted for it, what is recommended as giving yo
 in command line will expose it in your shell's history. Password is masked during prompt.
 
 ### Options:
-A comma-separated list of deployment options.
-
 * **startup**: Launch service after deployment.
 * **overwrite**: Overwrite existing service if one already exists.
-* **settings**: Overwrite settings and preferences too.
-* **npm_install**: Run 'npm install --ignore-scripts' (applies to Node.js services only)
-* **npm_install_run_scripts**: Run 'npm install' (applies to Node.js services only)
-* **instance_name=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
+* **overwritePrefs**: Overwrite settings and preferences too.
+* **npmInstall**: Run 'npm install --ignore-scripts' (applies to Node.js services only)
+* **runScripts**: Run 'npm install' (applies to Node.js services only)
+* **instanceName=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
 
 ### Other Switches:
 * `-N|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
@@ -132,6 +130,18 @@ Currently the Bridge supports following preferences:
   * remoteDebugPort : integer
 
 
+## Migrating from version 1
+* The deployment options is no more a comma-separated list. To pass multiple options, use multiple `-o` parameters.
+Also the names of the options got changed. Changes are summarized in the below table:
+
+| Old name              | New name     |
+|-----------------------|--------------|
+|settings               |overwritePrefs|
+|npm_install            |npmInstall    |
+|npm_install_run_scripts|runScripts    |
+|instance_name          |instanceName  |
+
+
 ## Usage Examples
 * Deploy *PurchaseOrderExample* to localhost  
 ``` bash
@@ -140,7 +150,7 @@ $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
 
 * Deploy *PurchaseOrderExample* to some development server. Overwrite existing instance and startup service afterwards. Additionally do not expose your password in command line (you'll be prompted for it)  
 ``` bash
-$ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -h devserver.my.org -o startup,overwrite
+$ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -h devserver.my.org -o startup -o overwrite
 ```
 
 * Start *PurchaseOrderExample* on some development server.   

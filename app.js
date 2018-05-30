@@ -100,7 +100,10 @@ function processCLI(argv) {
     settings['shrinkwrap'] = lib.useShrinkwrap(argv);
 
     if (operation === lib.operations.DEPLOY) {
-        const deployOptions = lib.gatherDeploymentOptions(argv['o'] || argv['option'] || argv['options']);
+        const opts =
+            [].concat(argv['o'], argv['option'], argv['options'])
+              .filter(v => v !== undefined);
+        const deployOptions = lib.gatherDeploymentOptions(opts);
         checkError(deployOptions.error);
         settings['options'] = deployOptions.options;
     } else {
