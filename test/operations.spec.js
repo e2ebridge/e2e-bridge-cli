@@ -60,6 +60,12 @@ describe("Operation", function() {
         })
     });
 
+    describe("'modelnotes'", function() {
+        it("is understood", function() {
+            testUnderstanding(lib.operations.MODELNOTES, requiredProperties);
+        })
+    });
+
     describe("'gugus'", function() {
         it("is not understood", function() {
             const result = lib.processOperation(['gugus', '']);

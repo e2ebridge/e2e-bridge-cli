@@ -14,6 +14,7 @@ A command-line interface to E2E Bridge based on Node.js
 
 * xUML Services only
     * kill
+    * list / view model notes
 
 * Node.js Services only
     * pack
@@ -67,6 +68,16 @@ To view / set service settings:
 - If no `set * *` arguments are given, the current service settings are displayed
 ``` bash
 $ e2ebridge settings ${ServiceName} [[-N|--nodejs]|[-j|--java]] [set ${SettingName} ${SettingValue}]... [settings]
+```
+
+To list available model notes for xUML service:
+``` bash
+$ e2ebridge modelnotes ${ServiceName} [settings]
+```
+
+To view chosen model notes for xUML service:
+``` bash
+$ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [settings]
 ```
 
 To get usage help:  

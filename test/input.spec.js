@@ -21,6 +21,19 @@ describe("Input arguments", function() {
         });
     });
 
+    describe("for 'modelnotes'", function() {
+
+        it("sets 'filename'", function() {
+            const opts = lib.resolveInputOutput(lib.operations.MODELNOTES, ['whatever', 'theNotes.txt']);
+            expect(opts).toEqual({ service: 'whatever', filename: 'theNotes.txt' });
+        });
+
+        it("does not set spurious 'filename'", function() {
+            const opts = lib.resolveInputOutput(lib.operations.MODELNOTES, ['whatever']);
+            expect(opts).toEqual({ service: 'whatever' });
+        });
+    });
+
     describe("for anything else", function() {
 
         it("sets 'service'", function() {
