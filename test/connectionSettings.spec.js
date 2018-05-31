@@ -54,23 +54,8 @@ describe("Connection settings", function() {
             expect(lib.gatherConnectionSettings({ host: 'test.host'}).settings.host).toEqual('test.host');
         });
 
-        it("influences 'node'", function() {
-            expect(lib.gatherConnectionSettings({ h: 'test.host'}).settings.node).toEqual('test.host');
-        });
-
         it("defaults to 'localhost'", function() {
             expect(lib.gatherConnectionSettings({}).settings.host).toEqual('localhost');
-        });
-    });
-
-    describe("node", function() {
-
-        it("can be set with 'n'", function() {
-            expect(lib.gatherConnectionSettings({ n: 'test.node'}).settings.node).toEqual('test.node');
-        });
-
-        it("can be set with 'node'", function() {
-            expect(lib.gatherConnectionSettings({ node: 'test.node'}).settings.node).toEqual('test.node');
         });
     });
 });

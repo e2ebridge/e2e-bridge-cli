@@ -11,8 +11,10 @@ A command-line interface to E2E Bridge based on Node.js
     * start
     * stop
     * view / set service preferences
-    * view / set service settings
     * view service status
+
+* xUML and Node.js
+    * view / set service settings
 
 * xUML Services only
     * kill
@@ -32,9 +34,9 @@ Global installation may require additional privileges.
 ## Usage
 This guide assumes global installation. If you installed locally, replace `e2ebridge` with `node path/to/app.js` (or, on linux `path/to/app.js`).
 
-To start, stop or remove a xUML, Node.js (-N) or Java (-j) service:
+To start, stop or remove a xUML, Node.js (-n) or Java (-j) service:
 ``` bash
-$ e2ebridge start|stop|remove ${ServiceName} [[-N|--nodejs]|[-j|--java]] [settings]
+$ e2ebridge start|stop|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [settings]
 ```
 
 To pack a Node.js service:
@@ -63,13 +65,13 @@ $ e2ebridge kill ${ServiceName} [settings]
 To view / set service preferences:
 - If no `pref * *` arguments are given, the current service preferences are displayed
 ``` bash
-$ e2ebridge preferences ${ServiceName} [[-N|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
+$ e2ebridge preferences ${ServiceName} [[-n|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
 ```
 
 To view / set service settings:
 - If no `set * *` arguments are given, the current service settings are displayed
 ``` bash
-$ e2ebridge settings ${ServiceName} [[-N|--nodejs]|[-j|--java]] [set ${SettingName} ${SettingValue}]... [settings]
+$ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [settings]
 ```
 
 To list available model notes for xUML service:
@@ -84,7 +86,7 @@ $ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [settings]
 
 To list services:
 ``` bash
-$ e2ebridge services [[-N|--nodejs]|[-j|--java]] [settings]
+$ e2ebridge services [[-n|--nodejs]|[-j|--java]] [settings]
 ```
 
 To get usage help:  
@@ -95,7 +97,6 @@ $ e2ebridge --help
 ### Settings:
 * `-h|--host <FQDN bridge host>` The host, that runs the bridge. Defaults to localhost.
 * `-p|--port <bridge port>` The port of the bridge. Defaults to 8080.
-* `-n|--node <node name>` The name of bridge node. Ignored for deployment. Defaults to ${host}.
 * `-u|--user <bridge user>` User that has the right to perform operation on bridge.
 Required. If not given, you'll be prompted for it.
 * `-P|--password <password for bridge user>` Password for the user.
@@ -111,7 +112,8 @@ in command line will expose it in your shell's history. Password is masked durin
 * **instanceName=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
 
 ### Other Switches:
-* `-N|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
+* `-n|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
+* `-N` The same as `-n`. Kept for backwards compatibility only.
 * `-j|--java` Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
 * `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
 * `-s|--shrinkwrap` Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
@@ -138,6 +140,8 @@ Currently the Bridge supports following preferences:
 
 
 ## Migrating from version 1
+* Support for nodes has been dropped. Therefore the `-n` parameter now signals a Node.js service. The `-N` continues to work though.
+
 * The deployment options is no more a comma-separated list. To pass multiple options, use multiple `-o` parameters.
 Also the names of the options got changed. Changes are summarized in the below table:
 
@@ -167,7 +171,7 @@ $ e2ebridge start PurchaseOrderExample -u admin -h devserver.my.org
 
 * Start myNodeServie on some development server (a Node.js service).   
 ``` bash
-$ e2ebridge start myNodeService -u admin -h devserver.my.org -N
+$ e2ebridge start myNodeService -u admin -h devserver.my.org -n
 ```
 
 * Set automatic startup of *PurchaseOrderExample* on some development server.

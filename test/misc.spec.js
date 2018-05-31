@@ -3,6 +3,10 @@ const lib = require('../lib/lib');
 
 describe("Argument parser", function() {
     describe("node.js", function() {
+        it("from 'n'", function() {
+            expect(lib.isNodeJS({ n: true })).toEqual(true);
+        });
+
         it("from 'N'", function() {
             expect(lib.isNodeJS({ N: true })).toEqual(true);
         });
