@@ -41,6 +41,7 @@ describe("Input arguments", function() {
             expect(lib.resolveInputOutput(lib.operations.STOP, ['whatever']).service).toEqual('whatever');
             expect(lib.resolveInputOutput(lib.operations.KILL, ['whatever']).service).toEqual('whatever');
             expect(lib.resolveInputOutput(lib.operations.REMOVE, ['whatever']).service).toEqual('whatever');
+            expect(lib.resolveInputOutput(lib.operations.STATUS, ['whatever']).service).toEqual('whatever');
             expect(lib.resolveInputOutput(lib.operations.SETTINGS, ['whatever']).service).toEqual('whatever');
             expect(lib.resolveInputOutput(lib.operations.PREFERENCES, ['whatever']).service).toEqual('whatever');
         });

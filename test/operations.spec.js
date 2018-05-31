@@ -36,6 +36,12 @@ describe("Operation", function() {
         })
     });
 
+    describe("'status'", function() {
+        it("is understood", function() {
+            testUnderstanding(lib.operations.STATUS, requiredProperties);
+        })
+    });
+
     describe("'deploy'", function() {
         it("is understood", function() {
             testUnderstanding(lib.operations.DEPLOY, requiredProperties);
