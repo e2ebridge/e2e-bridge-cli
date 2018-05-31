@@ -18,6 +18,7 @@ A command-line interface to E2E Bridge based on Node.js
 
 * xUML Services only
     * kill
+    * view extended information
     * list / view model notes
 
 * Node.js Services only
