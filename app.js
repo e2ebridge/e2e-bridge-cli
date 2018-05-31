@@ -21,7 +21,7 @@ function showHelp(message) {
     process.stdout.write(lib.helpText(message));
 }
 
-const processedCLI = processCLI(require('minimist')(process.argv.slice(2)));
+const processedCLI = processCLI(require('minimist')(process.argv.slice(2), { boolean: ['d', 'delete']}));
 
 if(!processedCLI) {
     process.exit(1);
@@ -82,16 +82,6 @@ function processCLI(argv) {
     settings['operation'] = operation;
     positionalArgs.shift();
 
-    Object.assign(settings, lib.resolveInputOutput(operation, positionalArgs));
-
-    if (operation === lib.operations.PREFERENCES) {
-        settings['preferences'] = lib.gatherPreferences(positionalArgs);
-    }
-
-    if (operation === lib.operations.SETTINGS) {
-        settings['settings'] = lib.gatherSettings(positionalArgs);
-    }
-
     let connectionSettings = lib.gatherConnectionSettings(argv);
     checkError(connectionSettings.error);
     Object.assign(settings, connectionSettings.settings);
@@ -110,6 +100,7 @@ function processCLI(argv) {
         settings['nodejs'] = lib.isNodeJS(argv);
         settings['java'] = lib.isJava(argv);
         settings['xslt'] = lib.isXslt(argv);
+        settings['delete'] = lib.doDelete(argv);
 
         if(operation === lib.operations.KILL && (settings['nodejs'] || settings['java'])) {
             showHelp('"Kill" does not accept service type switches.');
@@ -120,7 +111,23 @@ function processCLI(argv) {
             showHelp('Only one type switch is allowed. Pick one of --nodejs, --java, or --xslt.');
             return;
         }
+
+        if(operation !== lib.operations.RESOURCES && settings['delete']) {
+            showHelp('Only "resources" command can accept "delete" switch.');
+            return;
+        }
     }
+
+    Object.assign(settings, lib.resolveInputOutput(operation, positionalArgs, settings));
+
+    if (operation === lib.operations.PREFERENCES) {
+        settings['preferences'] = lib.gatherPreferences(positionalArgs);
+    }
+
+    if (operation === lib.operations.SETTINGS) {
+        settings['settings'] = lib.gatherSettings(positionalArgs);
+    }
+
     return {settings, requiredProperties};
 }
 

@@ -48,6 +48,20 @@ describe("Argument parser", function() {
         });
     });
 
+    describe("delete", function() {
+        it("from 'd'", function() {
+            expect(lib.doDelete({ d: true })).toEqual(true);
+        });
+
+        it("from 'delete'", function() {
+            expect(lib.doDelete({ 'delete': true })).toEqual(true);
+        });
+
+        it("is false by default", function() {
+            expect(lib.doDelete({})).toBeFalsy();
+        });
+    });
+
     describe("git", function() {
         it("from 'g'", function() {
             expect(lib.useGit({ g: true })).toEqual(true);

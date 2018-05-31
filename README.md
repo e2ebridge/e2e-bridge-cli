@@ -28,6 +28,7 @@ A command-line interface to E2E Bridge based on Node.js
 
 * Resources (general, java, xslt)
     * list
+    * delete
 
 * Can be installed as global utility
 
