@@ -109,14 +109,15 @@ function processCLI(argv) {
     } else {
         settings['nodejs'] = lib.isNodeJS(argv);
         settings['java'] = lib.isJava(argv);
+        settings['xslt'] = lib.isXslt(argv);
 
         if(operation === lib.operations.KILL && (settings['nodejs'] || settings['java'])) {
             showHelp('"Kill" does not accept service type switches.');
             return;
         }
 
-        if (settings['nodejs'] && settings['java']) {
-            showHelp('Node.js and Java mode cannot be used simultaneously.');
+        if (settings['nodejs'] + settings['java'] + settings['xslt'] > 1) {
+            showHelp('Only one type switch is allowed. Pick one of --nodejs, --java, or --xslt.');
             return;
         }
     }

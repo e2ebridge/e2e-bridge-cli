@@ -26,6 +26,9 @@ A command-line interface to E2E Bridge based on Node.js
 * Node.js Services only
     * pack
 
+* Resources (general, java, xslt)
+    * list
+
 * Can be installed as global utility
 
 ## Installation
@@ -117,7 +120,8 @@ in command line will expose it in your shell's history. Password is masked durin
 ### Other Switches:
 * `-n|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
 * `-N` The same as `-n`. Kept for backwards compatibility only.
-* `-j|--java` Assume that the service is a Java service. This is ignored for "deploy" and illegal for "kill".
+* `-j|--java` Assume that the service is a Java service or the resource is a Java resource.
+* `-x|--xslt` Assume that the resource is an XSLT resource.
 * `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
 * `-s|--shrinkwrap` Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 

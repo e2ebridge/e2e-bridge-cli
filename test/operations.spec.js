@@ -102,6 +102,15 @@ describe("Operation", function() {
         })
     });
 
+    describe("'resources'", function() {
+        it("is understood", function() {
+            const result = lib.processOperation([lib.operations.RESOURCES]);
+            expect(result.error).toBeFalsy();
+            expect(result.operation).toEqual(lib.operations.RESOURCES);
+            expect(result.requiredProperties).toEqual(requiredProperties);
+        })
+    });
+
     describe("'gugus'", function() {
         it("is not understood", function() {
             const result = lib.processOperation(['gugus', '']);
