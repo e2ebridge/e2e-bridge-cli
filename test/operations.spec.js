@@ -54,6 +54,15 @@ describe("Operation", function() {
         })
     });
 
+    describe("'cancel-session'", function() {
+        it("is understood", function() {
+            const result = lib.processOperation([lib.operations.CANCEL_SESSION, '', '']);
+            expect(result.error).toBeFalsy();
+            expect(result.operation).toEqual(lib.operations.CANCEL_SESSION);
+            expect(result.requiredProperties).toEqual(requiredProperties);
+        })
+    });
+
     describe("'deploy'", function() {
         it("is understood", function() {
             testUnderstanding(lib.operations.DEPLOY, requiredProperties);
