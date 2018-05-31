@@ -48,6 +48,12 @@ describe("Operation", function() {
         })
     });
 
+    describe("'sessions'", function() {
+        it("is understood", function() {
+            testUnderstanding(lib.operations.SESSIONS, requiredProperties);
+        })
+    });
+
     describe("'deploy'", function() {
         it("is understood", function() {
             testUnderstanding(lib.operations.DEPLOY, requiredProperties);

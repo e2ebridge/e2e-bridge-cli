@@ -20,6 +20,7 @@ A command-line interface to E2E Bridge based on Node.js
     * kill
     * view extended information
     * list / view model notes
+    * list running sessions
 
 * Node.js Services only
     * pack
