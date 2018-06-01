@@ -31,6 +31,9 @@ A command-line interface to E2E Bridge based on Node.js
     * delete
     * upload
 
+* Global variables
+    * list
+
 * Can be installed as global utility
 
 ## Installation
