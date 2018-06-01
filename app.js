@@ -125,9 +125,11 @@ function processCLI(argv) {
                 showHelp('Only "resources" command can accept "delete" switch.');
                 return;
             }
+        }
 
-            if(settings['upload']) {
-                showHelp('Only "resources" command can accept "upload" switch.');
+        if(operation !== lib.operations.RESOURCES && operation !== lib.operations.CUSTOMNOTES) {
+            if (settings['upload']) {
+                showHelp('Only "resources" and "customnotes" commands can accept "upload" switch.');
                 return;
             }
         }

@@ -93,6 +93,12 @@ describe("Operation", function() {
         })
     });
 
+    describe("'customnotes'", function() {
+        it("is understood", function() {
+            testUnderstanding(lib.operations.CUSTOMNOTES, requiredProperties);
+        })
+    });
+
     describe("'repository'", function() {
         it("is understood", function() {
             testUnderstanding(lib.operations.REPOSITORY, requiredProperties);
