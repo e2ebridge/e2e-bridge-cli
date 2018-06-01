@@ -12,6 +12,7 @@ A command-line interface to E2E Bridge based on Node.js
     * stop
     * view / set service preferences
     * view service status
+    * download repository
 
 * xUML and Node.js
     * view / set service settings

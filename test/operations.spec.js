@@ -93,6 +93,12 @@ describe("Operation", function() {
         })
     });
 
+    describe("'repository'", function() {
+        it("is understood", function() {
+            testUnderstanding(lib.operations.REPOSITORY, requiredProperties);
+        })
+    });
+
     describe("'services'", function() {
         it("is understood", function() {
             const result = lib.processOperation([lib.operations.SERVICES]);
