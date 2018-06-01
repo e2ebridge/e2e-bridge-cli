@@ -62,6 +62,16 @@ describe("Argument parser", function() {
         });
     });
 
+    describe("upload", function() {
+        it("from 'upload'", function() {
+            expect(lib.doUpload({ upload: true })).toEqual(true);
+        });
+
+        it("is false by default", function() {
+            expect(lib.doUpload({})).toBeFalsy();
+        });
+    });
+
     describe("git", function() {
         it("from 'g'", function() {
             expect(lib.useGit({ g: true })).toEqual(true);

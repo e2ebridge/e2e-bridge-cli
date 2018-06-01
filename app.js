@@ -21,7 +21,14 @@ function showHelp(message) {
     process.stdout.write(lib.helpText(message));
 }
 
-const processedCLI = processCLI(require('minimist')(process.argv.slice(2), { boolean: ['d', 'delete']}));
+const cliParseSettings = {
+    boolean: [
+        'd', 'delete',
+        'upload',
+    ]
+};
+
+const processedCLI = processCLI(require('minimist')(process.argv.slice(2), cliParseSettings));
 
 if(!processedCLI) {
     process.exit(1);
@@ -101,6 +108,7 @@ function processCLI(argv) {
         settings['java'] = lib.isJava(argv);
         settings['xslt'] = lib.isXslt(argv);
         settings['delete'] = lib.doDelete(argv);
+        settings['upload'] = lib.doUpload(argv);
 
         if(operation === lib.operations.KILL && (settings['nodejs'] || settings['java'])) {
             showHelp('"Kill" does not accept service type switches.');
@@ -112,9 +120,16 @@ function processCLI(argv) {
             return;
         }
 
-        if(operation !== lib.operations.RESOURCES && settings['delete']) {
-            showHelp('Only "resources" command can accept "delete" switch.');
-            return;
+        if(operation !== lib.operations.RESOURCES) {
+            if(settings['delete']) {
+                showHelp('Only "resources" command can accept "delete" switch.');
+                return;
+            }
+
+            if(settings['upload']) {
+                showHelp('Only "resources" command can accept "upload" switch.');
+                return;
+            }
         }
     }
 

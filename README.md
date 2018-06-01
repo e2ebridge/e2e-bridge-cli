@@ -29,6 +29,7 @@ A command-line interface to E2E Bridge based on Node.js
 * Resources (general, java, xslt)
     * list
     * delete
+    * upload
 
 * Can be installed as global utility
 
@@ -94,6 +95,11 @@ $ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [settings]
 To list services:
 ``` bash
 $ e2ebridge services [[-n|--nodejs]|[-j|--java]] [settings]
+```
+
+To upload a resource:
+``` bash
+$ e2ebridge resources --upload ${FilePath} [[-x|--xslt]|[-j|--java]] [settings]
 ```
 
 To get usage help:  
