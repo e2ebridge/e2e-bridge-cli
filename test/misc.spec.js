@@ -34,20 +34,6 @@ describe("Argument parser", function() {
         });
     });
 
-    describe("xslt", function() {
-        it("from 'x'", function() {
-            expect(lib.isXslt({ x: true })).toEqual(true);
-        });
-
-        it("from 'xslt'", function() {
-            expect(lib.isXslt({ xslt: true })).toEqual(true);
-        });
-
-        it("is false by default", function() {
-            expect(lib.isXslt({})).toBeFalsy();
-        });
-    });
-
     describe("delete", function() {
         it("from 'd'", function() {
             expect(lib.doDelete({ d: true })).toEqual(true);

@@ -123,6 +123,24 @@ describe("Operation", function() {
         })
     });
 
+    describe("'java-resources'", function() {
+        it("is understood", function() {
+            const result = lib.processOperation([lib.operations.JAVA_RESOURCES]);
+            expect(result.error).toBeFalsy();
+            expect(result.operation).toEqual(lib.operations.RESOURCES);
+            expect(result.requiredProperties).toEqual(requiredProperties);
+        })
+    });
+
+    describe("'xslt-resources'", function() {
+        it("is understood", function() {
+            const result = lib.processOperation([lib.operations.XSLT_RESOURCES]);
+            expect(result.error).toBeFalsy();
+            expect(result.operation).toEqual(lib.operations.RESOURCES);
+            expect(result.requiredProperties).toEqual(requiredProperties);
+        })
+    });
+
     describe("'variables'", function() {
         it("is understood", function() {
             const result = lib.processOperation([lib.operations.VARIABLES]);

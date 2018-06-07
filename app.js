@@ -81,13 +81,12 @@ function processCLI(argv) {
         return;
     }
 
-    const settings = {};
-
-    let {error, operation, requiredProperties = {} } = lib.processOperation(positionalArgs);
+    let {error, operation, settings, requiredProperties = {} } = lib.processOperation(positionalArgs);
     checkError(error);
 
     settings['operation'] = operation;
     positionalArgs.shift();
+
 
     let connectionSettings = lib.gatherConnectionSettings(argv);
     checkError(connectionSettings.error);
@@ -106,7 +105,6 @@ function processCLI(argv) {
     } else {
         settings['nodejs'] = lib.isNodeJS(argv);
         settings['java'] = lib.isJava(argv);
-        settings['xslt'] = lib.isXslt(argv);
         settings['delete'] = lib.doDelete(argv);
         settings['upload'] = lib.doUpload(argv);
 
@@ -115,8 +113,8 @@ function processCLI(argv) {
             return;
         }
 
-        if (settings['nodejs'] + settings['java'] + settings['xslt'] > 1) {
-            showHelp('Only one type switch is allowed. Pick one of --nodejs, --java, or --xslt.');
+        if (settings['nodejs'] + settings['java'] > 1) {
+            showHelp('Only one type switch is allowed. Pick one of --nodejs, or --java.');
             return;
         }
 

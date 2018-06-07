@@ -104,7 +104,7 @@ $ e2ebridge services [[-n|--nodejs]|[-j|--java]] [settings]
 
 To upload a resource:
 ``` bash
-$ e2ebridge resources --upload ${FilePath} [[-x|--xslt]|[-j|--java]] [settings]
+$ e2ebridge resources --upload ${FilePath} [settings]
 ```
 
 To get usage help:  
@@ -132,8 +132,7 @@ in command line will expose it in your shell's history. Password is masked durin
 ### Other Switches:
 * `-n|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".
 * `-N` The same as `-n`. Kept for backwards compatibility only.
-* `-j|--java` Assume that the service is a Java service or the resource is a Java resource.
-* `-x|--xslt` Assume that the resource is an XSLT resource.
+* `-j|--java` Assume that the service is a Java service.
 * `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
 * `-s|--shrinkwrap` Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 
