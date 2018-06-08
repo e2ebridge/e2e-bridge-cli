@@ -2,7 +2,6 @@
 
 'use strict';
 
-const util = require('util');
 const prompt = require('prompt');
 const lib = require('./lib/lib');
 
@@ -38,29 +37,15 @@ promptForMissingValues(processedCLI.settings, processedCLI.requiredProperties, f
     process.stdout.write('Working, please wait.\n');
 
     lib.perform(settings, function (error, result) {
-        let out = [settings.operation, ' ', settings.service || settings.file, ': '].join('');
-        let err = '';
+
         if (error) {
-            out += 'FAILED\n'.red;
-            if (error.errorType) {
-                err += 'Type: ' + error.errorType + '\n';
-                if (error.error && error.error.message) {
-                    err += 'Message: ' + error.error.message;
-                } else {
-                    err += util.inspect(error, {depth: 3});
-                }
-            } else {
-                err += util.inspect(error, {depth: 3});
-            }
-            err += '\n';
-            process.stdout.write(out);
-            process.stderr.write(err);
+            process.stdout.write(settings.statusFormatter('error', settings) + '\n');
+            process.stdout.write(settings.errorFormatter(error, settings) + '\n');
             process.exit(2);
         } else {
-            out += 'SUCCESS\n'.green;
-            process.stdout.write(out);
+            process.stdout.write(settings.statusFormatter('success', settings) + '\n');
             if (result) {
-                process.stdout.write(util.inspect(result, {depth: 3}) + '\n');
+                process.stdout.write(settings.responseFormatter(result, settings) + '\n');
             }
             process.exit(0);
         }
@@ -86,7 +71,6 @@ function processCLI(argv) {
 
     settings['operation'] = operation;
     positionalArgs.shift();
-
 
     let connectionSettings = lib.gatherConnectionSettings(argv);
     checkError(connectionSettings.error);
@@ -142,6 +126,8 @@ function processCLI(argv) {
     if (operation === lib.operations.SETTINGS) {
         settings['settings'] = lib.gatherSettings(positionalArgs);
     }
+
+    Object.assign(settings, lib.getOutputFormatters(settings));
 
     return {settings, requiredProperties};
 }
