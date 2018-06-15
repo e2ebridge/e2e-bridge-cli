@@ -9,6 +9,7 @@
     "e2ebridge": "./app.js"
   },
   "dependencies": {
+    "async": "^2.6.1",
     "e2e-bridge-lib": "~1.4.0",
     "minimist": "0.0.8",
     "prompts": "^0.1.8",

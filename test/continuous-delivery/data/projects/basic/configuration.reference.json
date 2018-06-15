@@ -1,0 +1,96 @@
+{
+  "domains": [
+    {
+      "name": "production",
+      "nodes": [
+        "prod1",
+        "prod2",
+        "prod3"
+      ],
+      "services": [
+        "CollectorService"
+      ],
+      "solutions": [
+        "solution1"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "prod1",
+      "label": [
+        "master"
+      ],
+      "location": {
+        "host": "prod1.e2ebridge.com",
+        "port": 8080
+      },
+      "user": "admin",
+      "password": "admin"
+    },
+    {
+      "name": "prod2",
+      "label": [
+        "slave"
+      ],
+      "location": {
+        "host": "prod2.e2ebridge.com",
+        "port": 8080
+      },
+      "user": "admin",
+      "password": "admin"
+    },
+    {
+      "name": "prod3",
+      "label": [
+        "slave"
+      ],
+      "location": {
+        "host": "prod3.e2ebridge.com",
+        "port": 8080
+      },
+      "user": "admin",
+      "password": "admin"
+    }
+  ],
+  "services": [
+    {
+      "name": "CollectorService",
+      "type": "xUML",
+      "repository": "/repositories/CollectorService.rep",
+      "settings": {}
+    },
+    {
+      "name": "CoordinatorService",
+      "type": "xUML",
+      "repository": "/repositories/CoordinatorService.rep",
+      "settings": {}
+    },
+    {
+      "name": "Worker1Service",
+      "type": "xUML",
+      "repository": "/repositories/Worker1Service.rep",
+      "settings": {}
+    },
+    {
+      "name": "Worker2Service",
+      "type": "xUML",
+      "repository": "/repositories/Worker2Service.rep",
+      "settings": {}
+    }
+  ],
+  "solutions": [
+    {
+      "name": "solution1",
+      "services": {
+        "master": [
+          "CoordinatorService"
+        ],
+        "slave": [
+          "Worker1Service",
+          "Worker2Service"
+        ]
+      }
+    }
+  ]
+}

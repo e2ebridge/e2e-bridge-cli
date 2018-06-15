@@ -1,0 +1,12 @@
+{
+  "local": {
+    "localhost": {
+      "CollectorService": {
+        "name": "CollectorService",
+        "type": "xUML",
+        "repository": "/repositories/CollectorService.rep",
+        "settings": {}
+      }
+    }
+  }
+}
