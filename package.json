@@ -11,8 +11,9 @@
   "dependencies": {
     "e2e-bridge-lib": "~1.4.0",
     "minimist": "0.0.8",
-    "prompt": "~0.2.12",
-    "tty-table": "^2.6.3"
+    "prompts": "^0.1.8",
+    "tty-table": "^2.6.3",
+    "clorox": "latest"
   },
   "author": {
     "name": "Scheer E2E AG",

@@ -2,7 +2,7 @@
 
 'use strict';
 
-const prompt = require('prompt');
+const prompts = require('prompts');
 const lib = require('./lib/lib');
 
 function checkError(error) {
@@ -33,7 +33,29 @@ if(!processedCLI) {
     process.exit(1);
 }
 
-promptForMissingValues(processedCLI.settings, processedCLI.requiredProperties, function(settings) {
+main(processedCLI.settings, processedCLI.requireConnection);
+
+async function main(settings, requireConnection) {
+    if (requireConnection && !settings['user'] || !settings['password']) {
+        const questions = [
+            {
+                type: 'text',
+                name: 'user',
+                message: 'User',
+                initial: settings['user']
+            },
+            {
+                type: 'password',
+                name: 'password',
+                message: 'Password',
+                initial: settings['password']
+            },
+        ];
+
+        let credentials = await prompts(questions);
+        Object.assign(settings, credentials);
+    }
+
     process.stdout.write('Working, please wait.\n');
 
     lib.perform(settings, function (error, result) {
@@ -50,7 +72,7 @@ promptForMissingValues(processedCLI.settings, processedCLI.requiredProperties, f
             process.exit(0);
         }
     });
-});
+}
 
 function processCLI(argv) {
 
@@ -66,18 +88,23 @@ function processCLI(argv) {
         return;
     }
 
-    let {error, operation, settings, requiredProperties = {} } = lib.processOperation(positionalArgs);
+
+    let {error, operation, settings, requireConnection } = lib.processOperation(positionalArgs);
     checkError(error);
 
     settings['operation'] = operation;
     positionalArgs.shift();
 
-    let connectionSettings = lib.gatherConnectionSettings(argv);
-    checkError(connectionSettings.error);
-    Object.assign(settings, connectionSettings.settings);
+    if(requireConnection) {
+        let connectionSettings = lib.gatherConnectionSettings(argv);
+        checkError(connectionSettings.error);
+        Object.assign(settings, connectionSettings.settings);
+    }
 
-    settings['git'] = lib.useGit(argv);
-    settings['shrinkwrap'] = lib.useShrinkwrap(argv);
+    if (operation === lib.operations.PACK) {
+        settings['git'] = lib.useGit(argv);
+        settings['shrinkwrap'] = lib.useShrinkwrap(argv);
+    }
 
     if (operation === lib.operations.DEPLOY) {
         const opts =
@@ -129,30 +156,5 @@ function processCLI(argv) {
 
     Object.assign(settings, lib.getOutputFormatters(settings));
 
-    return {settings, requiredProperties};
+    return {settings, requireConnection};
 }
-
-function promptForMissingValues(settings, requiredProperties, done) {
-    prompt.override = settings;
-    prompt.message = "Bridge";
-    prompt.delimiter = ' ';
-
-// Ask user for missing required options.
-// The more convenient prompt#addProperties API is broken
-    prompt.start().get({properties: requiredProperties}, function (err, result) {
-
-        // if all options given on command line, we get the original object as error. From my point of view it's stupid
-        // but we have to deal with it.
-        if (err) {
-            process.stderr.write(JSON.stringify(err, null, '\t'));
-            process.exit(3);
-        } else {
-            Object.keys(result).forEach(function (key) {
-                settings[key] = result[key];
-            })
-        }
-
-        done(settings);
-    });
-}
-
