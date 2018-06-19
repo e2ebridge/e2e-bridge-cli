@@ -1,4 +1,3 @@
-
 const lib = require('../lib/lib');
 const bridge = require('e2e-bridge-lib');
 
@@ -7,7 +6,7 @@ const optionNames = bridge.deploymentOptions;
 describe("Deployment options", function() {
 
     it("returns default for empty input", function() {
-        expect(lib.gatherDeploymentOptions()).toEqual({ options: bridge.defaultDeploymentOptions });
+        expect(lib.gatherDeploymentOptions()).toEqual({options: bridge.defaultDeploymentOptions});
     });
 
     it("understands 'startup' option", function() {
@@ -33,7 +32,7 @@ describe("Deployment options", function() {
     });
 
     it("understands 'instanceName' option", function() {
-        expect(lib.gatherDeploymentOptions([optionNames.INSTANCE_NAME+'=gugus']).options.instanceName).toEqual('gugus');
+        expect(lib.gatherDeploymentOptions([optionNames.INSTANCE_NAME + '=gugus']).options.instanceName).toEqual('gugus');
     });
 
     it("understands 'preserveNodeModules' option", function() {

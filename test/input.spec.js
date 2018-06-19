@@ -1,4 +1,3 @@
-
 const lib = require('../lib/lib');
 
 describe("Input arguments", function() {
@@ -25,12 +24,12 @@ describe("Input arguments", function() {
 
         it("sets 'filename'", function() {
             const opts = lib.resolveInputOutput(lib.operations.MODELNOTES, ['whatever', 'theNotes.txt']);
-            expect(opts).toEqual({ service: 'whatever', filename: 'theNotes.txt' });
+            expect(opts).toEqual({service: 'whatever', filename: 'theNotes.txt'});
         });
 
         it("does not set spurious 'filename'", function() {
             const opts = lib.resolveInputOutput(lib.operations.MODELNOTES, ['whatever']);
-            expect(opts).toEqual({ service: 'whatever' });
+            expect(opts).toEqual({service: 'whatever'});
         });
     });
 

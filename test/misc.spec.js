@@ -1,18 +1,17 @@
-
 const lib = require('../lib/lib');
 
 describe("Argument parser", function() {
     describe("node.js", function() {
         it("from 'n'", function() {
-            expect(lib.isNodeJS({ n: true })).toEqual(true);
+            expect(lib.isNodeJS({n: true})).toEqual(true);
         });
 
         it("from 'N'", function() {
-            expect(lib.isNodeJS({ N: true })).toEqual(true);
+            expect(lib.isNodeJS({N: true})).toEqual(true);
         });
 
         it("from 'nodejs'", function() {
-            expect(lib.isNodeJS({ nodejs: true })).toEqual(true);
+            expect(lib.isNodeJS({nodejs: true})).toEqual(true);
         });
 
         it("is false by default", function() {
@@ -22,11 +21,11 @@ describe("Argument parser", function() {
 
     describe("java", function() {
         it("from 'j'", function() {
-            expect(lib.isJava({ j: true })).toEqual(true);
+            expect(lib.isJava({j: true})).toEqual(true);
         });
 
         it("from 'java'", function() {
-            expect(lib.isJava({ java: true })).toEqual(true);
+            expect(lib.isJava({java: true})).toEqual(true);
         });
 
         it("is false by default", function() {
@@ -36,11 +35,11 @@ describe("Argument parser", function() {
 
     describe("delete", function() {
         it("from 'd'", function() {
-            expect(lib.doDelete({ d: true })).toEqual(true);
+            expect(lib.doDelete({d: true})).toEqual(true);
         });
 
         it("from 'delete'", function() {
-            expect(lib.doDelete({ 'delete': true })).toEqual(true);
+            expect(lib.doDelete({'delete': true})).toEqual(true);
         });
 
         it("is false by default", function() {
@@ -50,7 +49,7 @@ describe("Argument parser", function() {
 
     describe("upload", function() {
         it("from 'upload'", function() {
-            expect(lib.doUpload({ upload: true })).toEqual(true);
+            expect(lib.doUpload({upload: true})).toEqual(true);
         });
 
         it("is false by default", function() {
@@ -60,11 +59,11 @@ describe("Argument parser", function() {
 
     describe("git", function() {
         it("from 'g'", function() {
-            expect(lib.useGit({ g: true })).toEqual(true);
+            expect(lib.useGit({g: true})).toEqual(true);
         });
 
         it("from 'git'", function() {
-            expect(lib.useGit({ git: true })).toEqual(true);
+            expect(lib.useGit({git: true})).toEqual(true);
         });
 
         it("is false by default", function() {
@@ -74,11 +73,11 @@ describe("Argument parser", function() {
 
     describe("shrinkwrap", function() {
         it("from 's'", function() {
-            expect(lib.useShrinkwrap({ s: true })).toEqual(true);
+            expect(lib.useShrinkwrap({s: true})).toEqual(true);
         });
 
         it("from 'shrinkwrap'", function() {
-            expect(lib.useShrinkwrap({ shrinkwrap: true })).toEqual(true);
+            expect(lib.useShrinkwrap({shrinkwrap: true})).toEqual(true);
         });
 
         it("is false by default", function() {

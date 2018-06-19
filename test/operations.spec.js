@@ -1,4 +1,3 @@
-
 const lib = require('../lib/lib');
 
 describe("Operation", function() {

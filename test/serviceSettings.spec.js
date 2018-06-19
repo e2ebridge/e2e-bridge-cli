@@ -1,4 +1,3 @@
-
 const lib = require('../lib/lib');
 
 describe("Service settings", function() {
@@ -8,7 +7,7 @@ describe("Service settings", function() {
     });
 
     it("understands single setting", function() {
-        expect(lib.gatherSettings(['set', 'x', 'y'])).toEqual({ x: 'y' });
+        expect(lib.gatherSettings(['set', 'x', 'y'])).toEqual({x: 'y'});
     });
 
     it("understands many settings", function() {
@@ -16,7 +15,7 @@ describe("Service settings", function() {
             'set', 'x', 'y',
             'set', 'z', 'abrakadabra',
             'set', 'b', 'c',
-        ])).toEqual({ x: 'y', z: 'abrakadabra', b: 'c' });
+        ])).toEqual({x: 'y', z: 'abrakadabra', b: 'c'});
     });
 
     it("skips garbage", function() {
@@ -25,6 +24,6 @@ describe("Service settings", function() {
             'set', 'x', 'y',
             'garbage', 'z', 'abrakadabra',
             'set', 'b', 'c',
-        ])).toEqual({ x: 'y', b: 'c' });
+        ])).toEqual({x: 'y', b: 'c'});
     });
 });
