@@ -5,7 +5,8 @@
         "name": "CollectorService",
         "type": "xUML",
         "repository": "/repositories/CollectorService.rep",
-        "settings": {}
+        "settings": {},
+        "preferences": {}
       }
     }
   }

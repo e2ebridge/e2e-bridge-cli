@@ -8,7 +8,8 @@
         "settings": {
           "Collector_collectInterval": "60",
           "Collector_dataReceiver": "localhost"
-        }
+        },
+        "preferences": {}
       }
     }
   }

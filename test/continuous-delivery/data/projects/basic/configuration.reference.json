@@ -58,25 +58,29 @@
       "name": "CollectorService",
       "type": "xUML",
       "repository": "/repositories/CollectorService.rep",
-      "settings": {}
+      "settings": {},
+      "preferences": {}
     },
     {
       "name": "CoordinatorService",
       "type": "xUML",
       "repository": "/repositories/CoordinatorService.rep",
-      "settings": {}
+      "settings": {},
+      "preferences": {}
     },
     {
       "name": "Worker1Service",
       "type": "xUML",
       "repository": "/repositories/Worker1Service.rep",
-      "settings": {}
+      "settings": {},
+      "preferences": {}
     },
     {
       "name": "Worker2Service",
       "type": "xUML",
       "repository": "/repositories/Worker2Service.rep",
-      "settings": {}
+      "settings": {},
+      "preferences": {}
     }
   ],
   "solutions": [

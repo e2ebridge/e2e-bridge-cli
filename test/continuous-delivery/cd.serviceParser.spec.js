@@ -3,9 +3,9 @@ const s = require('../../lib/continuous-delivery/service');
 describe("Continuous delivery", function() {
     describe("service parser", function() {
         describe("normalization", function() {
-            it('of string guarded setting works', function() {
+            it('of string guarded value works', function() {
                 const input = 'gugus';
-                const result = s.normalizeSettingValue(input);
+                const result = s.normalizeGuardedValue(input);
                 expect(result).toEqual({
                     domain: [],
                     label: [],
@@ -22,7 +22,8 @@ describe("Continuous delivery", function() {
                         name: '',
                         type: 'xUML',
                         repository: '/home/modeller/cd/repositories/Repo.rep',
-                        settings: {}
+                        settings: {},
+                        preferences: {}
                     });
                 });
 

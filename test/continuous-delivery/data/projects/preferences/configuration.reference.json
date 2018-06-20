@@ -30,49 +30,65 @@
       "name": "CollectorService",
       "type": "xUML",
       "repository": "/repositories/CollectorService.rep",
-      "settings": {
-        "Collector_collectInterval": [
+      "settings": {},
+      "preferences": {
+        "bridgeServerLogLevel": [
           {
             "domain": [],
             "label": [],
             "node": [],
-            "value": "60"
-          }
-        ],
-        "Collector_dataReceiver": [
-          {
-            "domain": [],
-            "label": [],
-            "node": [],
-            "value": "localhost"
+            "value": "Info"
           },
           {
-            "domain": [
-              "local"
-            ],
+            "domain": [],
             "label": [],
             "node": [
-              "prod1"
+              "localhost"
             ],
-            "value": "monitoring.e2ebridge.com"
-          },
+            "value": "Debug"
+          }
+        ],
+        "transactionLogLevel": [
           {
             "domain": [],
             "label": [],
             "node": [],
-            "value": "monitoring-s1.e2ebridge.com"
+            "value": "None"
           },
           {
             "domain": [],
-            "label": [
-              "test"
+            "label": [],
+            "node": [
+              "localhost"
             ],
+            "value": "IOInternal"
+          }
+        ],
+        "transactionLogRotInterval": [
+          {
+            "domain": [],
+            "label": [],
             "node": [],
-            "value": "monitoring-s2.e2ebridge.com"
+            "value": "DAILY"
+          }
+        ],
+        "automaticStartup": [
+          {
+            "domain": [],
+            "label": [],
+            "node": [],
+            "value": false
+          }
+        ],
+        "automaticRestart": [
+          {
+            "domain": [],
+            "label": [],
+            "node": [],
+            "value": false
           }
         ]
-      },
-      "preferences": {}
+      }
     }
   ],
   "solutions": []

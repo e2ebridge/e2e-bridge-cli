@@ -1,7 +1,7 @@
 const cd = require('../../../lib/continuous-delivery');
 const path = require('path');
 
-const projectDir = path.resolve(__dirname, '../data/projects/settings');
+const projectDir = path.resolve(__dirname, '../data/projects/preferences');
 
 const configuration = require(projectDir + '/configuration.reference');
 const deliveryTree = require(projectDir + '/deliveryTree.reference');
@@ -25,13 +25,6 @@ describe('Continuous delivery', function() {
         const tree = cd.createDeliveryTree(configuration.domains, configuration.nodes,
             configuration.solutions, configuration.services, errors);
         expect(tree).toEqual(deliveryTree);
-        const error = {
-            level: 'warn',
-            message: "domain 'local', service 'CollectorService': " +
-                "'Collector_dataReceiver': choosing 'localhost' " +
-                "over 'monitoring-s1.e2ebridge.com' even though they both " +
-                "match with the same quality"
-        };
-        expect(errors).toEqual([error]);
+        expect(errors).toEqual([]);
     });
 });

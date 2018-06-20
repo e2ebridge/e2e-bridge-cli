@@ -40,19 +40,22 @@ describe('Continuous delivery', function() {
                     name: 'CollectorService',
                     type: 'xUML',
                     repository: '/repositories/CollectorService.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 },
                 Worker1Service: {
                     name: 'Worker1Service',
                     type: 'xUML',
                     repository: '/repositories/Worker1Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
                     type: 'xUML',
                     repository: '/repositories/Worker2Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             }
         });
@@ -70,7 +73,8 @@ describe('Continuous delivery', function() {
                     name: 'Worker1Service',
                     type: 'xUML',
                     repository: '/repositories/Worker1Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             }
         });
@@ -88,7 +92,8 @@ describe('Continuous delivery', function() {
                     name: 'Worker2Service',
                     type: 'xUML',
                     repository: '/repositories/Worker2Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             },
             prod3: {
@@ -96,7 +101,8 @@ describe('Continuous delivery', function() {
                     name: 'Worker2Service',
                     type: 'xUML',
                     repository: '/repositories/Worker2Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             }
         });
@@ -114,13 +120,15 @@ describe('Continuous delivery', function() {
                     name: 'Worker1Service',
                     type: 'xUML',
                     repository: '/repositories/Worker1Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
                     type: 'xUML',
                     repository: '/repositories/Worker2Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             },
             prod3: {
@@ -128,13 +136,15 @@ describe('Continuous delivery', function() {
                     name: 'Worker1Service',
                     type: 'xUML',
                     repository: '/repositories/Worker1Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
                     type: 'xUML',
                     repository: '/repositories/Worker2Service.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             }
         });
@@ -152,7 +162,8 @@ describe('Continuous delivery', function() {
                     name: 'CollectorService',
                     type: 'xUML',
                     repository: '/repositories/CollectorService.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             },
             prod2: {
@@ -160,7 +171,8 @@ describe('Continuous delivery', function() {
                     name: 'CollectorService',
                     type: 'xUML',
                     repository: '/repositories/CollectorService.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             },
             prod3: {
@@ -168,7 +180,8 @@ describe('Continuous delivery', function() {
                     name: 'CollectorService',
                     type: 'xUML',
                     repository: '/repositories/CollectorService.rep',
-                    settings: {}
+                    settings: {},
+                    preferences: {},
                 }
             }
         });
