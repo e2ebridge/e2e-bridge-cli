@@ -175,7 +175,6 @@ function processCLI(argv) {
 
     if(operation === lib.operations.PACK) {
         settings['git'] = lib.useGit(argv);
-        settings['shrinkwrap'] = lib.useShrinkwrap(argv);
     }
 
     if(operation === lib.operations.DEPLOY) {

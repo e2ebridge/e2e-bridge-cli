@@ -70,18 +70,4 @@ describe("Argument parser", function() {
             expect(lib.useGit({})).toBeFalsy();
         });
     });
-
-    describe("shrinkwrap", function() {
-        it("from 's'", function() {
-            expect(lib.useShrinkwrap({s: true})).toEqual(true);
-        });
-
-        it("from 'shrinkwrap'", function() {
-            expect(lib.useShrinkwrap({shrinkwrap: true})).toEqual(true);
-        });
-
-        it("is false by default", function() {
-            expect(lib.useShrinkwrap({})).toBeFalsy();
-        });
-    });
 });

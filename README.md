@@ -134,7 +134,6 @@ in command line will expose it in your shell's history. Password is masked durin
 * `-N` The same as `-n`. Kept for backwards compatibility only.
 * `-j|--java` Assume that the service is a Java service.
 * `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
-* `-s|--shrinkwrap` Execute "npm shrinkwrap" before creating the repository. This is ignored for all commands but "pack".
 
 ### Service Preferences:
 Currently the Bridge supports following preferences:
@@ -169,6 +168,10 @@ Also the names of the options got changed. Changes are summarized in the below t
 |npm_install            |npmInstall    |
 |npm_install_run_scripts|runScripts    |
 |instance_name          |instanceName  |
+
+* The `--shrinkwrap` option has been dropped. Npm 5 or newer should be used as it automatically
+creates `package-lock.json` which provides the same functionality. This file will always be
+packed if present.
 
 
 ## Usage Examples
