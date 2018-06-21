@@ -126,7 +126,7 @@ function deliveryMain(settings) {
 }
 
 async function main(settings, requireConnection) {
-    if(requireConnection && !settings['user'] || !settings['password']) {
+    if(requireConnection && (!settings['user'] || !settings['password'])) {
         const questions = [
             {
                 type: 'text',
