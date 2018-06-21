@@ -88,7 +88,8 @@
             "value": false
           }
         ]
-      }
+      },
+      "deploymentOptions": {}
     }
   ],
   "solutions": []

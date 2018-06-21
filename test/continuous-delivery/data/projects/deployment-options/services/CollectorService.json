@@ -1,0 +1,20 @@
+{
+  "type": "node",
+  "repository": "CollectorService.zip",
+  "deploymentOptions": {
+    "preserveNodeModules": [
+      {
+        "node": "localhost",
+        "value": true
+      }
+    ],
+    "instanceName": [
+      "CollectorService",
+      {
+        "node": "localhost",
+        "value": "CollectorService-dev"
+      }
+    ],
+    "npmInstall": true
+  }
+}

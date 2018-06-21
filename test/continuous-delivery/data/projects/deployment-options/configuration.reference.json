@@ -28,52 +28,46 @@
   "services": [
     {
       "name": "CollectorService",
-      "type": "xUML",
-      "repository": "/repositories/CollectorService.rep",
-      "settings": {
-        "Collector_collectInterval": [
+      "type": "node",
+      "repository": "/repositories/CollectorService.zip",
+      "settings": {},
+      "preferences": {},
+      "deploymentOptions": {
+        "preserveNodeModules": [
           {
             "domain": [],
-            "label": [],
-            "node": [],
-            "value": "60"
-          }
-        ],
-        "Collector_dataReceiver": [
-          {
-            "domain": [],
-            "label": [],
-            "node": [],
-            "value": "localhost"
-          },
-          {
-            "domain": [
-              "local"
-            ],
             "label": [],
             "node": [
-              "prod1"
+              "localhost"
             ],
-            "value": "monitoring.e2ebridge.com"
-          },
+            "value": true
+          }
+        ],
+        "instanceName": [
           {
             "domain": [],
             "label": [],
             "node": [],
-            "value": "monitoring-s1.e2ebridge.com"
+            "value": "CollectorService"
           },
           {
             "domain": [],
-            "label": [
-              "test"
+            "label": [],
+            "node": [
+              "localhost"
             ],
+            "value": "CollectorService-dev"
+          }
+        ],
+        "npmInstall": [
+          {
+            "domain": [],
+            "label": [],
             "node": [],
-            "value": "monitoring-s2.e2ebridge.com"
+            "value": true
           }
         ]
-      },
-      "preferences": {},
-      "deploymentOptions": {}
+      }
     }
   ],
   "solutions": []

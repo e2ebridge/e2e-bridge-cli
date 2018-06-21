@@ -42,6 +42,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/CollectorService.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 },
                 Worker1Service: {
                     name: 'Worker1Service',
@@ -49,6 +50,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker1Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
@@ -56,6 +58,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker2Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             }
         });
@@ -75,6 +78,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker1Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             }
         });
@@ -94,6 +98,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker2Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             },
             prod3: {
@@ -103,6 +108,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker2Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             }
         });
@@ -122,6 +128,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker1Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
@@ -129,6 +136,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker2Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             },
             prod3: {
@@ -138,6 +146,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker1Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 },
                 Worker2Service: {
                     name: 'Worker2Service',
@@ -145,6 +154,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/Worker2Service.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             }
         });
@@ -164,6 +174,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/CollectorService.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             },
             prod2: {
@@ -173,6 +184,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/CollectorService.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             },
             prod3: {
@@ -182,6 +194,7 @@ describe('Continuous delivery', function() {
                     repository: '/repositories/CollectorService.rep',
                     settings: {},
                     preferences: {},
+                    deploymentOptions: {},
                 }
             }
         });

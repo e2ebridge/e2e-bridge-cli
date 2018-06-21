@@ -6,7 +6,8 @@
         "type": "xUML",
         "repository": "/repositories/CollectorService.rep",
         "settings": {},
-        "preferences": {}
+        "preferences": {},
+        "deploymentOptions": {}
       }
     }
   }

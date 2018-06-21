@@ -23,7 +23,8 @@ describe("Continuous delivery", function() {
                         type: 'xUML',
                         repository: '/home/modeller/cd/repositories/Repo.rep',
                         settings: {},
-                        preferences: {}
+                        preferences: {},
+                        deploymentOptions: {},
                     });
                 });
 
