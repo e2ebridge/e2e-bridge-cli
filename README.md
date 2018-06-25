@@ -59,16 +59,16 @@ To pack a Node.js service:
 - During pack no file should be modified otherwise error "Didn't get expected byte count" can happen.
   To prevent packing the current package or older packages place them outside the source
   folder or put package names into .e2eignore.
-``` bash
-$ e2ebridge pack ${path/to/directory} [${path/to/repository}]
-```
+  ``` bash
+  $ e2ebridge pack ${path/to/directory} [${path/to/repository}]
+  ```
 
 To deploy a service:
 - If path to repository is a directory it will be packed and published. Only useful for Node.js services.
 - If path to repository is omitted the current directory is used. Only useful for Node.js services.
-``` bash
-$ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o option]...
-```
+  ``` bash
+  $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o option]...
+  ```
 
 To kill an xUML service:
 ``` bash
@@ -77,15 +77,15 @@ $ e2ebridge kill ${ServiceName} [settings]
 
 To view / set service preferences:
 - If no `pref * *` arguments are given, the current service preferences are displayed
-``` bash
-$ e2ebridge preferences ${ServiceName} [[-n|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
-```
+  ``` bash
+  $ e2ebridge preferences ${ServiceName} [[-n|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
+  ```
 
 To view / set service settings:
 - If no `set * *` arguments are given, the current service settings are displayed
-``` bash
-$ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [settings]
-```
+  ``` bash
+  $ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [settings]
+  ```
 
 To list available model notes for xUML service:
 ``` bash
@@ -162,12 +162,12 @@ Currently the Bridge supports following preferences:
 * The deployment options is no more a comma-separated list. To pass multiple options, use multiple `-o` parameters.
 Also the names of the options got changed. Changes are summarized in the below table:
 
-| Old name              | New name     |
-|-----------------------|--------------|
-|settings               |overwritePrefs|
-|npm_install            |npmInstall    |
-|npm_install_run_scripts|runScripts    |
-|instance_name          |instanceName  |
+    | Old name              | New name     |
+    |-----------------------|--------------|
+    |settings               |overwritePrefs|
+    |npm_install            |npmInstall    |
+    |npm_install_run_scripts|runScripts    |
+    |instance_name          |instanceName  |
 
 * The `--shrinkwrap` option has been dropped. Npm 5 or newer should be used as it automatically
 creates `package-lock.json` which provides the same functionality. This file will always be
@@ -175,32 +175,32 @@ packed if present.
 
 
 ## Usage Examples
-* Deploy *PurchaseOrderExample* to localhost  
-``` bash
-$ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
-```
+* __Deploy__ *PurchaseOrderExample* to localhost  
+    ``` bash
+    $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
+    ```
 
-* Deploy *PurchaseOrderExample* to some development server. Overwrite existing instance and startup service afterwards. Additionally do not expose your password in command line (you'll be prompted for it)  
-``` bash
-$ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -h devserver.my.org -o startup -o overwrite
-```
+* __Deploy__ *PurchaseOrderExample* to some development server. Overwrite existing instance and startup service afterwards. Additionally do not expose your password in command line (you'll be prompted for it)  
+    ``` bash
+    $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -h devserver.my.org -o startup -o overwrite
+    ```
 
-* Start *PurchaseOrderExample* on some development server.   
-``` bash
-$ e2ebridge start PurchaseOrderExample -u admin -h devserver.my.org
-```
+* __Start__ *PurchaseOrderExample* on some development server.   
+    ``` bash
+    $ e2ebridge start PurchaseOrderExample -u admin -h devserver.my.org
+    ```
 
-* Start myNodeServie on some development server (a Node.js service).   
-``` bash
-$ e2ebridge start myNodeService -u admin -h devserver.my.org -n
-```
+* __Start__ myNodeServie on some development server (a Node.js service).   
+    ``` bash
+    $ e2ebridge start myNodeService -u admin -h devserver.my.org -n
+    ```
 
-* Set automatic startup of *PurchaseOrderExample* on some development server.
-``` bash
-$ e2ebridge preferences PurchaseOrderExample pref automaticStartup true -u admin -h devserver.my.org
-```
+* __Set automatic startup__ of *PurchaseOrderExample* on some development server.
+    ``` bash
+    $ e2ebridge preferences PurchaseOrderExample pref automaticStartup true -u admin -h devserver.my.org
+    ```
 
 * Set Setting "global_Settings::Folder Name to move mails in that are skipped" of *PurchaseOrderExample* on some development server.
-``` bash
-$ e2ebridge settings PurchaseOrderExample set "global_Settings::Folder Name to move mails in that are skipped" "SKIPPED" -u admin -h devserver.my.org
-```
+    ``` bash
+    $ e2ebridge settings PurchaseOrderExample set "global_Settings::Folder Name to move mails in that are skipped" "SKIPPED" -u admin -h devserver.my.org
+    ```
