@@ -173,6 +173,19 @@ Also the names of the options got changed. Changes are summarized in the below t
 
 
 ## Usage Examples
+* __List__ all Node-js services
+  ``` bash
+  $ e2ebridge services --nodejs -u admin -P admin
+  ```
+  Output:
+  ``` bash
+  ┌──────────────────┬────────┬─────────┐
+  │     Service      │  Type  │ Status  │
+  ├──────────────────┼────────┼─────────┤
+  │ e2e-dashboard-ui │ NodeJs │ Stopped │
+  │ helloworld       │ NodeJs │ Running │
+  └──────────────────┴────────┴─────────┘
+  ```
 * __Deploy__ *PurchaseOrderExample* to localhost  
     ``` bash
     $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
@@ -197,8 +210,24 @@ Also the names of the options got changed. Changes are summarized in the below t
     ``` bash
     $ e2ebridge preferences PurchaseOrderExample pref automaticStartup true -u admin -h devserver.my.org
     ```
+    Output:
+    ```
+  ┌───────────────────────────┬───────┐
+  │         Property          │ Value │
+  ├───────────────────────────┼───────┤
+  │ bridgeServerLogLevel      │ Info  │
+  │ transactionLogLevel       │ None  │
+  │ transactionLogRotInterval │ DAILY │
+  │ automaticStartup          │ true  │
+  │ automaticRestart          │ false │
+  │ owner                     │ admin │
+  └───────────────────────────┴───────┘
+    ````
 
 * Set Setting "global_Settings::Folder Name to move mails in that are skipped" of *PurchaseOrderExample* on some development server.
     ``` bash
     $ e2ebridge settings PurchaseOrderExample set "global_Settings::Folder Name to move mails in that are skipped" "SKIPPED" -u admin -h devserver.my.org
     ```
+    Output:
+A tabular list of all settings. The changed setting is printed in bold.
+
