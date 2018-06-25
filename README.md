@@ -136,7 +136,7 @@ in command line will expose it in your shell's history. Password is masked durin
 * `-g|--git` Use "git archive" for building the repository. This is ignored for all commands but "pack".
 
 ### Service Preferences:
-Currently the Bridge supports following preferences:
+Currently the Bridge supports the following preferences:
 - All services:
   * automaticStartup : boolean
   * automaticRestart : boolean
@@ -169,9 +169,7 @@ Also the names of the options got changed. Changes are summarized in the below t
     |npm_install_run_scripts|runScripts    |
     |instance_name          |instanceName  |
 
-* The `--shrinkwrap` option has been dropped. Npm 5 or newer should be used as it automatically
-creates `package-lock.json` which provides the same functionality. This file will always be
-packed if present.
+* The `--shrinkwrap` option has been dropped. Npm 5 or newer should be used as it automatically creates `package-lock.json` which provides the same functionality. This file will always be packed if present.
 
 
 ## Usage Examples
