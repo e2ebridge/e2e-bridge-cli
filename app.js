@@ -295,7 +295,14 @@ async function executeNodeTaskList(taskList, settings) {
                 console.log(clorox.green('* ') + `on ${clorox.bold(cfg.name)} would run task`);
                 console.log(nodeUtil.inspect(task, {depth: 10, color: true}));
             } else {
-                await lib.executeTask(instance, task);
+                const text = `${task.parameters['service']} on ${clorox.bold(cfg.name)}: ${task.type}`;
+                try {
+                    await lib.executeTask(instance, task);
+                    console.log(`${clorox.green('✔')} ${text}`);
+                } catch(e) {
+                    console.log(`${clorox.red('✘')} ${text}`);
+                    throw e;
+                }
             }
         }
     });
