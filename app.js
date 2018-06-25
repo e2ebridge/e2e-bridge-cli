@@ -265,7 +265,7 @@ async function deliverConfiguration(configuration, settings) {
 
 async function executeNodeTaskList(taskList, settings) {
     let cfg = Object.assign({}, taskList.nodeConfig);
-    if(!cfg.user || !cfg.password) {
+    if(!settings['dry-run'] && (!cfg.user || !cfg.password)) {
         const name = `${cfg.name} (${cfg.location})`;
         const questions = [
             {
