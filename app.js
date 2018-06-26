@@ -29,7 +29,8 @@ const cliParseSettings = {
     boolean: [
         'd', 'delete',
         'upload',
-        'dry-run'
+        'dry-run',
+        'break-on-error',
     ]
 };
 
@@ -76,6 +77,7 @@ if(('' + argv._[0]).toLowerCase() === lib.operations.DELIVER) {
     settings['solutionFilter'] = toFilter(argv['solution']);
     settings['serviceFilter'] = toFilter(argv['service']);
     settings['dry-run'] = argv['dry-run'];
+    settings['break-on-error'] = argv['break-on-error'];
 
     Object.assign(settings, lib.getOutputFormatters(settings));
 
@@ -290,18 +292,27 @@ async function executeNodeTaskList(taskList, settings) {
         cfg.user, cfg.password);
 
     const promises = taskList.serviceTasks.map(async tasks => {
+        let skip = false;
         for(const task of tasks) {
             if(settings['dry-run']) {
                 console.log(clorox.green('* ') + `on ${clorox.bold(cfg.name)} would run task`);
                 console.log(nodeUtil.inspect(task, {depth: 10, color: true}));
             } else {
                 const text = `${task.parameters['service']} on ${clorox.bold(cfg.name)}: ${task.type}`;
+                if(skip) {
+                    console.log(`${clorox.yellow('⏩')} Skipped: ${text}`);
+                    continue;
+                }
                 try {
                     await lib.executeTask(instance, task);
                     console.log(`${clorox.green('✔')} ${text}`);
                 } catch(e) {
                     console.log(`${clorox.red('✘')} ${text}`);
-                    throw e;
+                    if(settings['break-on-error']) {
+                        throw e;
+                    } else {
+                        skip = true;
+                    }
                 }
             }
         }
