@@ -224,7 +224,7 @@ function processCLI(argv) {
     }
 
     if(operation === lib.operations.SETTINGS) {
-        settings['settings'] = lib.gatherSettings(positionalArgs);
+        settings['settings'] = lib.gatherSettings(positionalArgs, settings);
     }
 
     Object.assign(settings, lib.getOutputFormatters(settings));

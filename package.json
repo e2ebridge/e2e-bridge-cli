@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "async": "^2.6.1",
+    "clorox": "latest",
     "e2e-bridge-lib": "~1.4.0",
+    "lodash": "^4.17.10",
     "minimist": "0.0.8",
     "prompts": "^0.1.8",
-    "tty-table": "^2.6.3",
-    "clorox": "latest"
+    "tty-table": "^2.6.3"
   },
   "author": {
     "name": "Scheer E2E AG",
