@@ -17,9 +17,9 @@ describe("Continuous delivery", function() {
             describe('of entire service', function() {
                 it('without settings works', function() {
                     const input = {type: 'xUML', repository: 'Repo.rep'};
-                    const result = s.normalize(input, '/home/modeller/cd');
+                    const result = s.normalize(input, 'srv', '/home/modeller/cd');
                     expect(result).toEqual({
-                        name: '',
+                        name: 'srv',
                         type: 'xUML',
                         repository: '/home/modeller/cd/repositories/Repo.rep',
                         settings: {},
