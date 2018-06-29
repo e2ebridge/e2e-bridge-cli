@@ -112,7 +112,7 @@ To deliver services to Bridge installations:
 ``` bash
 ```
 
-To get usage help:  
+To get usage help:
 ``` bash
 $ e2ebridge --help
 ```
@@ -191,22 +191,22 @@ Also the names of the options got changed. Changes are summarized in the below t
   │ helloworld       │ NodeJs │ Running │
   └──────────────────┴────────┴─────────┘
   ```
-* __Deploy__ *PurchaseOrderExample* to localhost  
+* __Deploy__ *PurchaseOrderExample* to localhost
     ``` bash
     $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -P admin
     ```
 
-* __Deploy__ *PurchaseOrderExample* to some development server. Overwrite existing instance and startup service afterwards. Additionally do not expose your password in command line (you'll be prompted for it)  
+* __Deploy__ *PurchaseOrderExample* to some development server. Overwrite existing instance and startup service afterwards. Additionally do not expose your password in command line (you'll be prompted for it)
     ``` bash
     $ e2ebridge deploy /tmp/PurchaseOrderExample.rep -u admin -h devserver.my.org -o startup -o overwrite
     ```
 
-* __Start__ *PurchaseOrderExample* on some development server.   
+* __Start__ *PurchaseOrderExample* on some development server.
     ``` bash
     $ e2ebridge start PurchaseOrderExample -u admin -h devserver.my.org
     ```
 
-* __Start__ myNodeServie on some development server (a Node.js service).   
+* __Start__ myNodeServie on some development server (a Node.js service).
     ``` bash
     $ e2ebridge start myNodeService -u admin -h devserver.my.org -n
     ```
