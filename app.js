@@ -209,10 +209,26 @@ function processCLI(argv) {
             }
         }
 
-        if(operation !== lib.operations.RESOURCES && operation !== lib.operations.CUSTOMNOTES) {
+        if(operation !== lib.operations.RESOURCES &&
+            operation !== lib.operations.CUSTOMNOTES &&
+            operation !== lib.operations.SETTINGS) {
             if(settings['upload']) {
-                showHelp('Only "resources" and "customnotes" commands can accept "upload" switch.');
+                showHelp('Only "resources", "customnotes", ' +
+                    'and "settings" commands can accept "upload" switch.');
                 return;
+            }
+        }
+
+        if(operation === lib.operations.SETTINGS) {
+            if(settings['upload'] && !settings['nodejs']) {
+                showHelp('"upload" switch for "settings" command works only for Node.js services');
+                return;
+            } else if(!settings['upload']) {
+                const firstArg = positionalArgs[0];
+                if(firstArg && firstArg !== 'set') {
+                    showHelp('Incorrect number of arguments');
+                    return;
+                }
             }
         }
     }
@@ -223,7 +239,7 @@ function processCLI(argv) {
         settings['preferences'] = lib.gatherPreferences(positionalArgs);
     }
 
-    if(operation === lib.operations.SETTINGS) {
+    if(operation === lib.operations.SETTINGS && !settings['upload']) {
         settings['settings'] = lib.gatherSettings(positionalArgs, settings);
     }
 

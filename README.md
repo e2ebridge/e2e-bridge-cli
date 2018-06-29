@@ -236,3 +236,9 @@ Also the names of the options got changed. Changes are summarized in the below t
     Output:
 A tabular list of all settings. The changed setting is printed in bold.
 
+* Set MyNodeService's settings from local file:
+    ```bash
+    $ e2ebridge settings MyNodeService --upload ~/settings/MyNodeService.json -n -u admin
+    ```
+    Output:
+JSON object representing the service's new settings.
