@@ -260,8 +260,16 @@ async function deliverConfiguration(configuration, settings) {
         };
     }
 
+    const executionErrors = [];
     for(const taskList of taskLists) {
-        await executeNodeTaskList(taskList, settings);
+        executionErrors.push(...await executeNodeTaskList(taskList, settings));
+    }
+
+    if(executionErrors.filter(e => e).length > 0) {
+        throw {
+            errorType: 'delivery',
+            message: 'Some delivery actions were unsuccessful.'
+        };
     }
 }
 
@@ -291,8 +299,9 @@ async function executeNodeTaskList(taskList, settings) {
     const instance = new E2EBridge(cfg.location.host, cfg.location.port,
         cfg.user, cfg.password);
 
-    const promises = taskList.serviceTasks.map(async tasks => {
+    let promises = taskList.serviceTasks.map(async tasks => {
         let skip = false;
+        let error = null;
         for(const task of tasks) {
             if(settings['dry-run']) {
                 console.log(clorox.green('* ') + `on ${clorox.bold(cfg.name)} would run task`);
@@ -312,11 +321,20 @@ async function executeNodeTaskList(taskList, settings) {
                         throw e;
                     } else {
                         skip = true;
+                        error = e;
                     }
                 }
             }
         }
+
+        if(error) {
+            throw error;
+        }
     });
+
+    if(!settings['break-on-error']) {
+        promises = promises.map(p => p.catch(e => e));
+    }
 
     return await Promise.all(promises);
 }
