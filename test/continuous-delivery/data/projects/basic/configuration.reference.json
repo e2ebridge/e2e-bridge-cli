@@ -5,7 +5,8 @@
       "nodes": [
         "prod1",
         "prod2",
-        "prod3"
+        "prod3",
+        "Morra"
       ],
       "services": [
         "CollectorService"

@@ -25,7 +25,11 @@ describe('Continuous delivery', function() {
         const tree = cd.createDeliveryTree(configuration.domains, configuration.nodes,
             configuration.solutions, configuration.services, errors);
         expect(tree).toEqual(deliveryTree);
-        expect(errors).toEqual([]);
+        const badNodeError = {
+            level: 'error',
+            message: "Domain 'production' uses unknown node 'Morra'"
+        };
+        expect(errors).toEqual([badNodeError]);
     });
 
     it('can filter by node', function() {
