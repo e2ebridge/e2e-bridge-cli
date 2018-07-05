@@ -22,8 +22,10 @@ pipeline {
 		}
 		stage('test') {
 			steps {
-				sh 'npm test -- --junitreport --filePrefix=unit-test-results'
+				sh 'npm run test:with-coverage -- --junitreport --filePrefix=unit-test-results'
+				sh 'npm run coverage:cobertura'
 				junit 'unit-test-results.xml'
+				step([$class: 'CoberturaPublisher', coberturaReportFile: 'coverage/cobertura-coverage.xml'])
 			}
 		}
 	}

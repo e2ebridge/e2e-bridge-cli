@@ -3,7 +3,12 @@
   "version": "1.3.2",
   "scripts": {
     "start": "node cli.js",
-    "test": "cross-env node $NODE_DEBUG_OPTION ./node_modules/jasmine-xml-reporter/bin/jasmine.js"
+    "test": "cross-env node $NODE_DEBUG_OPTION ./node_modules/jasmine-xml-reporter/bin/jasmine.js",
+    "test:with-coverage": "nyc --reporter=text-summary ./node_modules/jasmine-xml-reporter/bin/jasmine.js",
+    "coverage:html": "nyc report --reporter=html",
+    "coverage:cobertura": "nyc report --reporter=cobertura",
+    "coverage:summary": "nyc report --reporter=text-summary",
+    "coverage:text": "nyc report --reporter=text"
   },
   "bin": {
     "e2ebridge": "./cli.js"
@@ -46,6 +51,7 @@
   "devDependencies": {
     "cross-env": "^5.1.5",
     "jasmine": "^3.1.0",
-    "jasmine-xml-reporter": "^1.2.1"
+    "jasmine-xml-reporter": "^1.2.1",
+    "nyc": "^12.0.2"
   }
 }
