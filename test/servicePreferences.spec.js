@@ -11,15 +11,15 @@ describe("Service preferences", function() {
     });
 
     it("understands single boolean preference", function() {
-        expect(lib.gatherPreferences(['pref', 'x', true])).toEqual({x: true});
+        expect(lib.gatherPreferences(['pref', 'x', 'true'])).toEqual({x: true});
     });
 
     it("understands many preferences", function() {
         expect(lib.gatherPreferences([
             'pref', 'x', 'y',
             'pref', 'z', 'abrakadabra',
-            'pref', 'b', true,
-            'pref', 'c', false,
+            'pref', 'b', 'true',
+            'pref', 'c', 'false',
         ])).toEqual({x: 'y', z: 'abrakadabra', b: true, c: false});
     });
 

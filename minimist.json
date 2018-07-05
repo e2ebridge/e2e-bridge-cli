@@ -1,0 +1,30 @@
+{
+  "alias": {
+    "delete": "d",
+    "git": "g",
+    "host": "h",
+    "java": "j",
+    "nodejs": ["n", "N"],
+    "options": ["o", "option"],
+    "password": "P",
+    "port": "p",
+    "user": "u"
+  },
+  "boolean": [
+    "break-on-error",
+    "delete",
+    "dry-run",
+    "git",
+    "help",
+    "java",
+    "nodejs",
+    "upload"
+  ],
+  "string": [
+    "domain",
+    "label",
+    "node",
+    "service",
+    "solution"
+  ]
+}
