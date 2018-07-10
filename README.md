@@ -47,9 +47,46 @@ Global installation may require additional privileges.
 ## Usage
 This guide assumes global installation. If you installed locally, replace `e2ebridge` with `node path/to/app.js` (or, on linux `path/to/app.js`).
 
+To list services:
+``` bash
+$ e2ebridge services [[-n|--nodejs]|[-j|--java]] [Bridge connection]
+```
+
+To view / set service preferences:
+- If no `pref * *` arguments are given, the current service preferences are displayed
+  ``` bash
+  $ e2ebridge preferences ${ServiceName} [[-n|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [Bridge connection]
+  ```
+
+To list available model notes for xUML service:
+``` bash
+$ e2ebridge modelnotes ${ServiceName} [Bridge connection]
+```
+
+To view chosen model notes for xUML service:
+``` bash
+$ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [Bridge connection]
+```
+
+To view / set service settings:
+- If no `set * *` arguments are given, the current service settings are displayed
+  ``` bash
+  $ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [Bridge connection]
+  ```
+
 To start, stop or remove a xUML, Node.js (-n) or Java (-j) service:
 ``` bash
-$ e2ebridge start|stop|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [settings]
+$ e2ebridge start|stop|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection]
+```
+
+To kill an xUML service:
+``` bash
+$ e2ebridge kill ${ServiceName} [Bridge connection]
+```
+
+To upload a resource:
+``` bash
+$ e2ebridge resources --upload ${FilePath} [Bridge connection]
 ```
 
 To pack a Node.js service:
@@ -67,44 +104,12 @@ To deploy a service:
 - If path to repository is a directory it will be packed and published. Only useful for Node.js services.
 - If path to repository is omitted the current directory is used. Only useful for Node.js services.
   ``` bash
-  $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [settings] [-o option]...
+  $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [Bridge connection] [-o [deployment option]]...
   ```
+  
+To deliver services to Bridge installations:
 
-To kill an xUML service:
 ``` bash
-$ e2ebridge kill ${ServiceName} [settings]
-```
-
-To view / set service preferences:
-- If no `pref * *` arguments are given, the current service preferences are displayed
-  ``` bash
-  $ e2ebridge preferences ${ServiceName} [[-n|--nodejs]|[-j|--java]] [pref ${PreferenceName} ${PreferenceValue}]... [settings]
-  ```
-
-To view / set service settings:
-- If no `set * *` arguments are given, the current service settings are displayed
-  ``` bash
-  $ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [settings]
-  ```
-
-To list available model notes for xUML service:
-``` bash
-$ e2ebridge modelnotes ${ServiceName} [settings]
-```
-
-To view chosen model notes for xUML service:
-``` bash
-$ e2ebridge modelnotes ${ServiceName} ${NotesFileName} [settings]
-```
-
-To list services:
-``` bash
-$ e2ebridge services [[-n|--nodejs]|[-j|--java]] [settings]
-```
-
-To upload a resource:
-``` bash
-$ e2ebridge resources --upload ${FilePath} [settings]
 ```
 
 To get usage help:  
@@ -112,7 +117,7 @@ To get usage help:
 $ e2ebridge --help
 ```
 
-### Settings:
+### Bridge connection:
 * `-h|--host <FQDN bridge host>` The host, that runs the bridge. Defaults to localhost.
 * `-p|--port <bridge port>` The port of the bridge. Defaults to 8080.
 * `-u|--user <bridge user>` User that has the right to perform operation on bridge.
@@ -121,7 +126,7 @@ Required. If not given, you'll be prompted for it.
 Required. If not given, you'll prompted for it, what is recommended as giving your password
 in command line will expose it in your shell's history. Password is masked during prompt.
 
-### Options:
+### Deployment options:
 * **startup**: Launch service after deployment.
 * **overwrite**: Overwrite existing service if one already exists.
 * **overwritePrefs**: Overwrite settings and preferences too.
