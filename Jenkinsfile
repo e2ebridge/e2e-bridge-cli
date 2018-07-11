@@ -15,6 +15,11 @@ pipeline {
 	}
 
 	stages {
+		stage('clean-up') {
+			steps {
+				sh 'git clean -fd'
+			}
+		}
 		stage('install') {
 			steps {
 				sh 'npm install'
