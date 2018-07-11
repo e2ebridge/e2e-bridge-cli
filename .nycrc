@@ -1,7 +1,6 @@
 {
-  "nyc": {
-    "exclude": [
-      "**/*.spec.js"
-    ]
-  }
+  "exclude": [
+    "**/*.spec.js",
+    "lib/formatters"
+  ]
 }

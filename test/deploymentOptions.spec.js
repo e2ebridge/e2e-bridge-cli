@@ -6,7 +6,9 @@ const optionNames = bridge.deploymentOptions;
 describe("Deployment options", function() {
 
     it("returns default for empty input", function() {
-        expect(lib.gatherDeploymentOptions()).toEqual({options: bridge.defaultDeploymentOptions});
+        const options = lib.gatherDeploymentOptions();
+        expect(options.options).toEqual(bridge.defaultDeploymentOptions);
+        expect(options.error).toBeFalsy();
     });
 
     it("understands 'startup' option", function() {
@@ -38,5 +40,13 @@ describe("Deployment options", function() {
     it("understands 'preserveNodeModules' option", function() {
         const options = lib.gatherDeploymentOptions([optionNames.PRESERVE_NODE_MODULES]).options;
         expect(options.preserveNodeModules).toEqual(true);
+    });
+
+    it("reports unknown option", function() {
+        const error = lib.gatherDeploymentOptions(['gugus']).error;
+        expect(error).toEqual({
+            level: 'error',
+            message: 'Unknown option "gugus".'
+        });
     });
 });

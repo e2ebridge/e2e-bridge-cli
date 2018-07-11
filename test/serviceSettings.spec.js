@@ -64,7 +64,7 @@ describe("Service settings", function() {
                         b: [undefined, 'c']
                     }
                 }
-            })
-        })
+            });
+        });
     });
 });
