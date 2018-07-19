@@ -577,6 +577,7 @@ async function executeNodeTaskList(taskList, settings, ioInterface) {
                     } else {
                         skip = true;
                         error = e;
+                        ioInterface.out(settings['errorFormatter'](error, settings) + '\n');
                     }
                 }
             }
