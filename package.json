@@ -1,6 +1,6 @@
 {
   "name": "e2e-bridge-cli",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "scripts": {
     "start": "node cli.js",
     "test": "cross-env node $NODE_DEBUG_OPTION ./node_modules/jasmine-xml-reporter/bin/jasmine.js",
