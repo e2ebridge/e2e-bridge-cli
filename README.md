@@ -36,6 +36,8 @@ A command-line interface to E2E Bridge based on Node.js
 * Global variables
     * list
 
+* Continuous delivery
+	* deliver
 * Can be installed as global utility
 
 ## Installation
@@ -107,10 +109,12 @@ To deploy a service:
   $ e2ebridge deploy [${path/to/repository}|${path/to/directory}] [Bridge connection] [-o [deployment option]]...
   ```
   
-To deliver services to Bridge installations:
+To deliver services to Bridge instances
 
 ``` bash
+$ e2ebridge deliver --domain ${DomainName} [--node ${NodeName}]... [--solution ${SolutionName}]... [--service ${ServiceName}]... [--break-on-error] [--dry-run]
 ```
+See [documentation of deliver command](README_deliver.md "e2e-bridge-cli: deliver Command") for more information and examples.
 
 To get usage help:
 ``` bash
