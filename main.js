@@ -222,7 +222,7 @@ function namedArgsToSettings(operation, args) {
     settings['git'] = args['git'];
     settings['delete'] = args['delete'];
     settings['upload'] = args['upload'];
-    settings['options'] = lib.gatherDeploymentOptions(args['options']);
+    settings['options'] = lib.gatherDeploymentOptions(args['options']).options;
 
     const toFilter = f => {
         if(Array.isArray(f)) {
