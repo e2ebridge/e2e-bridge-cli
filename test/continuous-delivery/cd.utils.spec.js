@@ -1,4 +1,4 @@
-const util = require('../../lib/continuous-delivery/util');
+const util = require('../../lib/util');
 
 describe("Continuous delivery", function() {
     describe("utils", function() {
