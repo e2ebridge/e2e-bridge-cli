@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "async": "^2.6.1",
-    "clorox": "^1.0.1",
+    "clorox": "^1.0.3",
     "e2e-bridge-lib": "^2.0.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "minimist": "^1.2.0",
-    "prompts": "^0.1.8",
-    "tty-table": "^2.6.7"
+    "prompts": "^2.0.1",
+    "tty-table": "^2.6.15"
   },
   "author": {
     "name": "Scheer E2E AG",
@@ -49,9 +49,9 @@
     "url": "https://github.com/e2ebridge/e2e-bridge-cli.git"
   },
   "devDependencies": {
-    "cross-env": "^5.1.5",
-    "jasmine": "^3.1.0",
+    "cross-env": "^5.2.0",
+    "jasmine": "^3.3.1",
     "jasmine-xml-reporter": "^1.2.1",
-    "nyc": "^12.0.2"
+    "nyc": "^13.1.0"
   }
 }
