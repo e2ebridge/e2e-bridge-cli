@@ -74,6 +74,14 @@
             "node": [],
             "value": 20
           }
+        ],
+        "allowKill": [
+          {
+            "domain": [],
+            "label": [],
+            "node": [],
+            "value": true
+          }
         ]
       }
     }

@@ -46,6 +46,11 @@ describe("Deployment options", function() {
         expect(lib.gatherDeploymentOptions([optionNames.STOP_TIMEOUT + '=15']).options.stopTimeout).toEqual(15);
     });
 
+    it("understands 'allowKill' option", function() {
+        const options = lib.gatherDeploymentOptions([optionNames.ALLOW_KILL]).options;
+        expect(options.allowKill).toEqual(true);
+    });
+
     it("reports unknown option", function() {
         const error = lib.gatherDeploymentOptions(['gugus']).error;
         expect(error).toEqual({

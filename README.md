@@ -143,6 +143,7 @@ in command line will expose it in your shell's history. Password is masked durin
 * **runScripts**: Run 'npm install' (applies to Node.js services only)
 * **instanceName=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
 * **stopTimeout=\<seconds\>**: Allow at least that many seconds before assuming that stop command failed (available as of **Bridge API 2.9.0**)
+* **allowKill**: If stopping the service before deployment fails, try to kill it (available as of **Bridge API 2.9.0**)
 
 ### Stop options
 * **stopTimeout=\<seconds\>**: Allow at least that many seconds before assuming that stop command failed (available as of **Bridge API 2.9.0**)

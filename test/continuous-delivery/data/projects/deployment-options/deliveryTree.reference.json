@@ -11,7 +11,8 @@
           "preserveNodeModules": true,
           "instanceName": "CollectorService-dev",
           "npmInstall": true,
-          "stopTimeout": 20
+          "stopTimeout": 20,
+          "allowKill": true
         }
       }
     }
