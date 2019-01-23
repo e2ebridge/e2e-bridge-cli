@@ -76,14 +76,19 @@ To view / set service settings:
   $ e2ebridge settings ${ServiceName} [-n|--nodejs] [set ${SettingName} ${SettingValue}]... [Bridge connection]
   ```
 
-To start, stop or remove a xUML, Node.js (-n) or Java (-j) service:
+To start or remove a xUML, Node.js (-n) or Java (-j) service:
 ``` bash
-$ e2ebridge start|stop|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection]
+$ e2ebridge start|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection]
+```
+
+To stop a xUML, Node.js (-n) or Java (-j) service:
+``` bash
+$ e2ebridge stop ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection] [Stop options]
 ```
 
 To kill an xUML service:
 ``` bash
-$ e2ebridge kill ${ServiceName} [Bridge connection]
+$ e2ebridge kill ${ServiceName} [Bridge connection] [Stop options]
 ```
 
 To upload a resource:
@@ -137,6 +142,10 @@ in command line will expose it in your shell's history. Password is masked durin
 * **npmInstall**: Run 'npm install --ignore-scripts' (applies to Node.js services only)
 * **runScripts**: Run 'npm install' (applies to Node.js services only)
 * **instanceName=\<instance name\>**: Choose a different instance name  (applies to Node.js services only)
+* **stopTimeout=\<seconds\>**: Allow at least that many seconds before assuming that stop command failed (available as of **Bridge API 2.9.0**)
+
+### Stop options
+* **stopTimeout=\<seconds\>**: Allow at least that many seconds before assuming that stop command failed (available as of **Bridge API 2.9.0**)
 
 ### Other Switches:
 * `-n|--nodejs` Assume that the service is a Node.js service. This is ignored for "deploy" and illegal for "kill".

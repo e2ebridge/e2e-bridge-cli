@@ -136,7 +136,7 @@ const SETTING_ACCEPTANCE = Object.freeze({
     "git": [lib.operations.PACK],
     "java": [...TYPE_SWITCHABLE],
     "nodejs": [...TYPE_SWITCHABLE, lib.operations.SETTINGS],
-    "options": [lib.operations.DEPLOY],
+    "options": [lib.operations.DEPLOY, lib.operations.KILL, lib.operations.STOP],
     "upload": [lib.operations.RESOURCES, lib.operations.CUSTOMNOTES, lib.operations.SETTINGS],
 
     "domain": [lib.operations.DELIVER],
@@ -205,6 +205,13 @@ function checkNamedArgs(operation, namedArguments) {
             errors.push(error);
         }
     }
+
+    if(operation === lib.operations.KILL || operation === lib.operations.STOP) {
+        const {error} = lib.gatherStopOptions(namedArguments['options']);
+        if(error) {
+            errors.push(error);
+        }
+    }
     return errors;
 }
 
@@ -222,7 +229,11 @@ function namedArgsToSettings(operation, args) {
     settings['git'] = args['git'];
     settings['delete'] = args['delete'];
     settings['upload'] = args['upload'];
-    settings['options'] = lib.gatherDeploymentOptions(args['options']).options;
+    if(operation === lib.operations.DEPLOY) {
+        settings['options'] = lib.gatherDeploymentOptions(args['options']).options;
+    } else if(operation === lib.operations.KILL || operation === lib.operations.STOP) {
+        settings['options'] = lib.gatherStopOptions(args['options']).options;
+    }
 
     const toFilter = f => {
         if(Array.isArray(f)) {

@@ -36,8 +36,10 @@ describe('service status commands', function() {
 
         setStatusSpy = spyOn(Bridge.prototype, 'setServiceStatus')
             .and
-            .callFake(function(status, name, serviceType, callback) {
-                return callback();
+            .callFake(function(status, name, serviceType, options, callback) {
+                return (typeof options === 'function'
+                        ? options
+                        : callback)();
             });
     });
 
@@ -83,7 +85,18 @@ describe('service status commands', function() {
                 await main.main(settings, ioInterface);
                 c.didSayWorking(ioInterface);
                 c.didCreateInstance(bridgeCreate, settings);
-                c.verifyLibCall(setStatusSpy, bridgeInstance, 'stop', serviceName, 'xUML');
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'stop', serviceName, 'xUML', {});
+            });
+
+            it('can stop an xUML service with timeout', async function() {
+                const localNamedArgs = Object.assign({}, namedArgs, {options: ["stopTimeout=55"]});
+                const {errors, settings} =
+                    main.createSettings('stop', localNamedArgs, positionalArgs);
+                expect(errors).toEqual([]);
+                await main.main(settings, ioInterface);
+                c.didSayWorking(ioInterface);
+                c.didCreateInstance(bridgeCreate, settings);
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'stop', serviceName, 'xUML', {stopTimeout: 55});
             });
 
             it('can stop a Node.js service', async function() {
@@ -116,6 +129,17 @@ describe('service status commands', function() {
                 c.didSayWorking(ioInterface);
                 c.didCreateInstance(bridgeCreate, settings);
                 c.verifyLibCall(setStatusSpy, bridgeInstance, 'kill', serviceName, 'xUML');
+            });
+
+            it('can kill an xUML service with timeout', async function() {
+                const localNamedArgs = Object.assign({}, namedArgs, {options: ["stopTimeout=55"]});
+                const {errors, settings} =
+                    main.createSettings('kill', localNamedArgs, positionalArgs);
+                expect(errors).toEqual([]);
+                await main.main(settings, ioInterface);
+                c.didSayWorking(ioInterface);
+                c.didCreateInstance(bridgeCreate, settings);
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'kill', serviceName, 'xUML', {stopTimeout: 55});
             });
 
             it('does not accept "--nodejs"', async function() {

@@ -42,6 +42,10 @@ describe("Deployment options", function() {
         expect(options.preserveNodeModules).toEqual(true);
     });
 
+    it("understands 'stopTimeout' option", function() {
+        expect(lib.gatherDeploymentOptions([optionNames.STOP_TIMEOUT + '=15']).options.stopTimeout).toEqual(15);
+    });
+
     it("reports unknown option", function() {
         const error = lib.gatherDeploymentOptions(['gugus']).error;
         expect(error).toEqual({

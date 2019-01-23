@@ -15,6 +15,7 @@
         "value": "CollectorService-dev"
       }
     ],
-    "npmInstall": true
+    "npmInstall": true,
+    "stopTimeout": 20
   }
 }

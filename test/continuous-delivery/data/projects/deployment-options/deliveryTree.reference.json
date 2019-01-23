@@ -10,7 +10,8 @@
         "deploymentOptions": {
           "preserveNodeModules": true,
           "instanceName": "CollectorService-dev",
-          "npmInstall": true
+          "npmInstall": true,
+          "stopTimeout": 20
         }
       }
     }

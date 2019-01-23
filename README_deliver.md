@@ -476,7 +476,8 @@ Content structure:
         "npmInstall": [true|false, condition (see below)],
         "runScripts": [true|false, condition (see below)],
         "instanceName": ["anInstanceName (Node.js services only)", condition (see below)],
-        "preserveNodeModules": [true|false, condition (see below)]
+        "preserveNodeModules": [true|false, condition (see below)],
+        "stopTimeout": [aNumberOfSeconds, condition (see below)]
     }
     "preferences": {
         "bridgeServerLogLevel": [None|Fatal|Error|Warning|Info|Debug, condition (see below)],
@@ -510,6 +511,7 @@ Content structure:
 | **runScripts**          | Specify whether scripts should be executed on `npm install`. This options is valid for Node.js services only.        | true&#124;**false**             |
 | **instanceName**        | For Node.js services, you can change the service instance name on deployment, if a new name is provided here.        | a string (default=**undefined**)|
 | **preserveNodeModules** | Upon deployment of a Node.js service, the modules folder will get deleted, if existent. By setting this option you can keep these folders. This can be useful, if you do not want to perform an npm install on deployment.| true&#124;**false**|
+| **stopTimeout**         | Specify how long (in seconds) the Bridge should wait for the service to stop before returning an error. Useful if the service is known to have long shutdown times (available as of **Bridge API 2.9.0**). | an integer&#124;**undefined**|
 
 
 | Service Preferences           | Description                                                                                                                | Allowed Values (default in bold)                                  |

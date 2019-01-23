@@ -66,6 +66,14 @@
             "node": [],
             "value": true
           }
+        ],
+        "stopTimeout": [
+          {
+            "domain": [],
+            "label": [],
+            "node": [],
+            "value": 20
+          }
         ]
       }
     }
