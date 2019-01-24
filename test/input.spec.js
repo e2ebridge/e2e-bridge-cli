@@ -42,6 +42,14 @@ describe("Input arguments", function() {
         });
     });
 
+    describe("for 'groups'", function() {
+        it("sets 'groupId'", function() {
+            const opts = main.positionalArgsToSettings(
+                lib.operations.GROUPS, {}, ['whatever']);
+            expect(opts).toEqual({groupId: 'whatever'});
+        });
+    });
+
     describe("for anything else", function() {
 
         it("sets 'service'", function() {

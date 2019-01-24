@@ -4,6 +4,7 @@
     "git": "g",
     "host": "h",
     "java": "j",
+    "modify": "m",
     "nodejs": ["n", "N"],
     "options": ["o", "option"],
     "password": "P",
@@ -17,13 +18,16 @@
     "git",
     "help",
     "java",
+    "modify",
     "nodejs",
     "upload"
   ],
   "string": [
     "domain",
     "label",
+    "name",
     "node",
+    "role",
     "service",
     "solution"
   ]

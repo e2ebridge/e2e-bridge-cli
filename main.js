@@ -133,12 +133,14 @@ const SETTING_ACCEPTANCE = Object.freeze({
     [CONNECTION_SETTINGS['PORT']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['USER']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['PASSWORD']]: operationsExcept(lib.operations.PACK),
-    "delete": [lib.operations.RESOURCES],
+    "delete": [lib.operations.GROUPS, lib.operations.RESOURCES],
     "git": [lib.operations.PACK],
     "java": [...TYPE_SWITCHABLE],
     "nodejs": [...TYPE_SWITCHABLE, lib.operations.SETTINGS],
     "options": [lib.operations.DEPLOY, lib.operations.KILL, lib.operations.STOP],
     "upload": [lib.operations.RESOURCES, lib.operations.CUSTOMNOTES, lib.operations.SETTINGS],
+    "name": [lib.operations.GROUPS],
+    "role": [lib.operations.GROUPS],
 
     "domain": [lib.operations.DELIVER],
     "node": [lib.operations.DELIVER],
@@ -230,6 +232,9 @@ function namedArgsToSettings(operation, args) {
     settings['git'] = args['git'];
     settings['delete'] = args['delete'];
     settings['upload'] = args['upload'];
+    settings['name'] = args['name'];
+    settings['role'] = args['role'];
+    settings['modify'] = args['modify'];
     if(operation === lib.operations.DEPLOY) {
         settings['options'] = lib.gatherDeploymentOptions(args['options']).options;
     } else if(operation === lib.operations.KILL || operation === lib.operations.STOP) {
@@ -300,6 +305,11 @@ function checkPositionalArgs(operation, settings, positionalArguments) {
             error = checkNbOfArgs(n => n <= 1);
             break;
 
+        case lib.operations.GROUPS:
+            let hasArgs = ['delete', 'modify', 'name', 'role'].some(s => !!settings[s]);
+            error = checkNbOfArgs(n => (n <= 1) && (!hasArgs || n === 1));
+            break;
+
         case lib.operations.SETTINGS:
             error = checkNbOfArgs(n => n >= 1 && ((n === 2) || ((n - 1) % 3 === 0)));
             break;
@@ -350,6 +360,8 @@ function positionalArgsToSettings(operation, cliSettings, positionalArguments) {
         }
     } else if(operation === lib.operations.DELIVER) {
         settings['projectRoot'] = path.resolve(positionalArguments.shift() || '.');
+    } else if(operation === lib.operations.GROUPS) {
+        settings['groupId'] = positionalArguments.shift();
     } else if(operation !== lib.operations.SERVICES) {
         settings['service'] = '' + positionalArguments.shift();
         if(operation === lib.operations.MODELNOTES) {
