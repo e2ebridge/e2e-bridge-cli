@@ -12,6 +12,7 @@
     "user": "u"
   },
   "boolean": [
+    "active",
     "break-on-error",
     "delete",
     "dry-run",
@@ -24,11 +25,16 @@
   ],
   "string": [
     "domain",
+    "group",
     "label",
     "name",
     "node",
     "role",
     "service",
-    "solution"
-  ]
+    "solution",
+    "user-password"
+  ],
+  "default": {
+    "active": null
+  }
 }

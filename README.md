@@ -41,6 +41,12 @@ A command-line interface to E2E Bridge based on Node.js
     * create
     * modify
     * delete
+    
+* Users  (available as of **Bridge API 2.8.0**)
+    * list
+    * create
+    * modify
+    * delete
 
 * Continuous delivery
 	* deliver
@@ -110,6 +116,26 @@ $ e2ebridge groups ${id} (-d|--delete) [Bridge connection]
 To create or modify user group:
 ``` bash
 $ e2ebridge groups ${id} [-m|--modify] [--name ${GroupName}] [--role ${AssignedRole}] [Bridge connection]
+```
+
+To list users or get single user:
+``` bash
+$ e2ebridge users [${id}] [Bridge connection]
+```
+
+To remove user:
+``` bash
+$ e2ebridge users ${id} (-d|--delete) [Bridge connection]
+```
+
+To create user:
+``` bash
+$ e2ebridge users ${id} --name ${UserName} [--active [true|false]] --group ${GroupName} --user-password ${UserPassword} [Bridge connection]
+```
+
+To modify user:
+``` bash
+$ e2ebridge users ${id} (-m|--modify) [--name ${UserName}] [--active [true|false]] [--group ${GroupName}] [--user-password ${UserPassword}] [Bridge connection]
 ```
 
 To pack a Node.js service:

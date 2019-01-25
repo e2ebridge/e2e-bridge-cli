@@ -133,14 +133,17 @@ const SETTING_ACCEPTANCE = Object.freeze({
     [CONNECTION_SETTINGS['PORT']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['USER']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['PASSWORD']]: operationsExcept(lib.operations.PACK),
-    "delete": [lib.operations.GROUPS, lib.operations.RESOURCES],
+    "delete": [lib.operations.GROUPS, lib.operations.RESOURCES, lib.operations.USERS],
     "git": [lib.operations.PACK],
     "java": [...TYPE_SWITCHABLE],
     "nodejs": [...TYPE_SWITCHABLE, lib.operations.SETTINGS],
     "options": [lib.operations.DEPLOY, lib.operations.KILL, lib.operations.STOP],
     "upload": [lib.operations.RESOURCES, lib.operations.CUSTOMNOTES, lib.operations.SETTINGS],
-    "name": [lib.operations.GROUPS],
+    "name": [lib.operations.GROUPS, lib.operations.USERS],
     "role": [lib.operations.GROUPS],
+    "active": [lib.operations.USERS],
+    "group": [lib.operations.USERS],
+    "user-password": [lib.operations.USERS],
 
     "domain": [lib.operations.DELIVER],
     "node": [lib.operations.DELIVER],
@@ -235,6 +238,9 @@ function namedArgsToSettings(operation, args) {
     settings['name'] = args['name'];
     settings['role'] = args['role'];
     settings['modify'] = args['modify'];
+    settings['active'] = args['active'];
+    settings['group'] = args['group'];
+    settings['user-password'] = args['user-password'];
     if(operation === lib.operations.DEPLOY) {
         settings['options'] = lib.gatherDeploymentOptions(args['options']).options;
     } else if(operation === lib.operations.KILL || operation === lib.operations.STOP) {
@@ -305,10 +311,17 @@ function checkPositionalArgs(operation, settings, positionalArguments) {
             error = checkNbOfArgs(n => n <= 1);
             break;
 
-        case lib.operations.GROUPS:
+        case lib.operations.GROUPS: {
             let hasArgs = ['delete', 'modify', 'name', 'role'].some(s => !!settings[s]);
             error = checkNbOfArgs(n => (n <= 1) && (!hasArgs || n === 1));
             break;
+        }
+
+        case lib.operations.USERS: {
+            let hasArgs = ['delete', 'modify', 'name', 'active', 'group', 'user-password'].some(s => !!settings[s]);
+            error = checkNbOfArgs(n => (n <= 1) && (!hasArgs || n === 1));
+            break;
+        }
 
         case lib.operations.SETTINGS:
             error = checkNbOfArgs(n => n >= 1 && ((n === 2) || ((n - 1) % 3 === 0)));
@@ -362,6 +375,8 @@ function positionalArgsToSettings(operation, cliSettings, positionalArguments) {
         settings['projectRoot'] = path.resolve(positionalArguments.shift() || '.');
     } else if(operation === lib.operations.GROUPS) {
         settings['groupId'] = positionalArguments.shift();
+    } else if(operation === lib.operations.USERS) {
+        settings['userId'] = positionalArguments.shift();
     } else if(operation !== lib.operations.SERVICES) {
         settings['service'] = '' + positionalArguments.shift();
         if(operation === lib.operations.MODELNOTES) {
