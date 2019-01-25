@@ -28,6 +28,30 @@ describe("Continuous delivery", function() {
                     });
                 });
 
+                it('with wrong deployment option type throws', function() {
+                    const input = {
+                        type: 'xUML',
+                        repository: 'Repo.rep',
+                        deploymentOptions: {
+                            startup: "true"
+                        }
+                    };
+                    expect(() => s.normalize(input, 'srv', '/home/modeller/cd'))
+                        .toThrowError(/The type of deployment option 'startup' is wrong\. Should be 'boolean' but found 'string'/);
+                });
+
+                it('with wrong deployment option name throws', function() {
+                    const input = {
+                        type: 'xUML',
+                        repository: 'Repo.rep',
+                        deploymentOptions: {
+                            wrongOption: "true"
+                        }
+                    };
+                    expect(() => s.normalize(input, 'srv', '/home/modeller/cd'))
+                        .toThrowError(/The deployment option 'wrongOption' is unknown. Use one of 'startup','overwrite','overwritePrefs','npmInstall','runScripts','instanceName','preserveNodeModules'/);
+                });
+
                 it('with wrong type throws', function() {
                     const input = {type: 'gugus', repository: 'Repo.rep'};
                     expect(() => s.normalize(input))
