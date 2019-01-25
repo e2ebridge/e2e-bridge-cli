@@ -107,6 +107,7 @@ const CONNECTION_SETTINGS = Object.freeze({
 const TYPE_SWITCHABLE = Object.freeze([
     lib.operations.START,
     lib.operations.STOP,
+    lib.operations.KILL,
     lib.operations.REMOVE,
     lib.operations.SERVICES,
     lib.operations.STATUS,

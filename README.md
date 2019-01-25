@@ -10,6 +10,7 @@ A command-line interface to E2E Bridge based on Node.js
     * remove
     * start
     * stop
+    * kill
     * view / set service preferences
     * view service status
     * download repository
@@ -18,7 +19,6 @@ A command-line interface to E2E Bridge based on Node.js
     * view / set service settings
 
 * xUML Services only
-    * kill
     * view extended information
     * list / view model notes
     * view / set custom notes
@@ -81,14 +81,9 @@ To start or remove a xUML, Node.js (-n) or Java (-j) service:
 $ e2ebridge start|remove ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection]
 ```
 
-To stop a xUML, Node.js (-n) or Java (-j) service:
+To stop or kill a xUML, Node.js (-n) or Java (-j) service:
 ``` bash
-$ e2ebridge stop ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection] [Stop options]
-```
-
-To kill an xUML service:
-``` bash
-$ e2ebridge kill ${ServiceName} [Bridge connection] [Stop options]
+$ e2ebridge stop|kill ${ServiceName} [[-n|--nodejs]|[-j|--java]] [Bridge connection] [Stop options]
 ```
 
 To upload a resource:

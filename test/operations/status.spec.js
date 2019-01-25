@@ -142,22 +142,24 @@ describe('service status commands', function() {
                 c.verifyLibCall(setStatusSpy, bridgeInstance, 'kill', serviceName, 'xUML', {stopTimeout: 55});
             });
 
-            it('does not accept "--nodejs"', async function() {
+            it('can kill a Node.js service', async function() {
                 const {errors, settings} =
                     main.createSettings('kill', c.withNodeSwitch(namedArgs), positionalArgs);
-                expect(errors).toEqual([{
-                    level: "error",
-                    message: "'kill' does not expect '--nodejs' argument"
-                }]);
+                expect(errors).toEqual([]);
+                await main.main(settings, ioInterface);
+                c.didSayWorking(ioInterface);
+                c.didCreateInstance(bridgeCreate, settings);
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'kill', serviceName, 'node');
             });
 
-            it('does not accept "--java"', async function() {
+            it('can kill a Java service', async function() {
                 const {errors, settings} =
                     main.createSettings('kill', c.withJavaSwitch(namedArgs), positionalArgs);
-                expect(errors).toEqual([{
-                    level: "error",
-                    message: "'kill' does not expect '--java' argument"
-                }]);
+                expect(errors).toEqual([]);
+                await main.main(settings, ioInterface);
+                c.didSayWorking(ioInterface);
+                c.didCreateInstance(bridgeCreate, settings);
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'kill', serviceName, 'java');
             });
         });
     });
