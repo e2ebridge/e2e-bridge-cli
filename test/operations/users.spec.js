@@ -88,7 +88,7 @@ describe('user commands', function() {
     it('can modify user', async function() {
         let operationSpy = c.makeTrivialSpy('modifyUser', 2);
         const id = 'gugus';
-        const gugus = {name: 'Not a Gugus', active: false};
+        const gugus = {name: 'Not a Gugus', group: undefined, password: undefined, active: false};
         const args = {...namedArgs, ...gugus, modify: true};
 
         const {errors, settings} =

@@ -85,7 +85,7 @@ describe('service status commands', function() {
                 await main.main(settings, ioInterface);
                 c.didSayWorking(ioInterface);
                 c.didCreateInstance(bridgeCreate, settings);
-                c.verifyLibCall(setStatusSpy, bridgeInstance, 'stop', serviceName, 'xUML', {});
+                c.verifyLibCall(setStatusSpy, bridgeInstance, 'stop', serviceName, 'xUML', Bridge.defaultStopOptions);
             });
 
             it('can stop an xUML service with timeout', async function() {
