@@ -16,7 +16,7 @@
   "dependencies": {
     "async": "^3.1.0",
     "clorox": "^1.0.3",
-    "e2e-bridge-lib": "^2.1.0",
+    "e2e-bridge-lib": "^2.2.0",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
     "prompts": "^2.2.1",
