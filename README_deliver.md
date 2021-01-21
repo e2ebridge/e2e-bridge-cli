@@ -130,7 +130,7 @@ Create a folder **nodes** in your project folder, and create a JSON file for eac
       "user": "myUser",
       "password": "myPassword",
       "label": ["slave", "master"]
-  }﻿
+  }
   ```
   ``` json
   {
@@ -138,7 +138,7 @@ Create a folder **nodes** in your project folder, and create a JSON file for eac
       "user": "myUser",
       "password": "myPassword",
       "label": ["slave"]
-  }﻿
+  }
   ```
 
 
@@ -317,7 +317,7 @@ settings definitions.
       "location": "prod.myDomain.com",
       "user": "myUser",
       "password": "myPassword"
-  }﻿
+  }
   ```
 - **Test Server**: `TestServer.json`
   ``` json
@@ -325,7 +325,7 @@ settings definitions.
       "location": "test.myDomain.com",
       "user": "myUser",
       "password": "myPassword"
-  }﻿
+  }
   ```
 
 **Services**
@@ -441,7 +441,7 @@ Content structure:
     "user": "myUser",
     "password": "myPassword",
     "label": ["myFirstLabel", "mySecondLabel", ...]
-}﻿
+}
 ```
 | Option                | Description                                                                                                                           | Mandatory | Allowed Values                                |
 |-----------------------|---------------------------------------------------------------------------------------------------------------------------------------|-----------|-----------------------------------------------|
