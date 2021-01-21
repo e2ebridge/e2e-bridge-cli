@@ -366,7 +366,7 @@ settings definitions.
 
 - **Test Scenario**
   ```bash
-  e2ebridge-cli deliver --domain Test
+  e2ebridge deliver --domain Test
   ```
   Deliver service **SAPInterface** to server test.mydomain.com with the following settings:
   - ProgramID = RFC_TEST_SERVER_ID (condition 1, default value)
@@ -375,7 +375,7 @@ settings definitions.
 
 - **Production Scenario**
   ```bash
-  e2ebridge-cli deliver --domain Prod
+  e2ebridge deliver --domain Prod
   ```
   Deliver service **SAPInterface** to server prod.mydomain.com with the following settings:
   - ProgramID = RFC_PROD_SERVER_ID (condition 2)
