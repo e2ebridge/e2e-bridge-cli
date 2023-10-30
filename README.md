@@ -169,6 +169,7 @@ $ e2ebridge --help
 ```
 
 ### Bridge connection:
+* `-s|--scheme http[s]|--protocol http[s]` The scheme/protocol to be used. Defaults to https.
 * `-h|--host <FQDN bridge host>` The host, that runs the bridge. Defaults to localhost.
 * `-p|--port <bridge port>` The port of the bridge. Defaults to 8080.
 * `-u|--user <bridge user>` User that has the right to perform operation on bridge.

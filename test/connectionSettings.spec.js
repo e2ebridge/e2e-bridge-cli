@@ -57,4 +57,22 @@ describe("Connection settings", function() {
             expect(lib.gatherConnectionSettings({}).settings.host).toEqual('localhost');
         });
     });
+
+    describe("protocol", function() {
+        it("can be set with 's'", function() {
+            expect(lib.gatherConnectionSettings({s: 'https'}).settings.protocol).toEqual('https');
+        });
+
+        it("can be set with 'scheme'", function() {
+            expect(lib.gatherConnectionSettings({scheme: 'https'}).settings.protocol).toEqual('https');
+        });
+
+        it("can be set with 'protocol'", function() {
+            expect(lib.gatherConnectionSettings({protocol: 'https'}).settings.protocol).toEqual('https');
+        });
+
+        it("defaults to 'https'", function() {
+            expect(lib.gatherConnectionSettings({}).settings.protocol).toEqual('https');
+        });
+    });
 });
