@@ -9,6 +9,7 @@
     "options": ["o", "option"],
     "password": "P",
     "port": "p",
+    "protocol": [ "s", "scheme" ],
     "user": "u"
   },
   "boolean": [
@@ -35,6 +36,7 @@
     "user-password"
   ],
   "default": {
-    "active": null
+    "active": null,
+    "protocol": "https"
   }
 }

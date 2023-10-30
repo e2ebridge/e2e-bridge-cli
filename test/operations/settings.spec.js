@@ -18,7 +18,7 @@ describe('setting-related commands', function() {
 
     let bridgeCreate;
     const bridgeInstance =
-        new Bridge(namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
+        new Bridge(namedArgs.protocol, namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
 
     beforeEach(function() {
         ioInterface = new TestIOInterface();

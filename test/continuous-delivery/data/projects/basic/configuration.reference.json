@@ -23,6 +23,7 @@
         "master"
       ],
       "location": {
+        "protocol": "https",
         "host": "prod1.e2ebridge.com",
         "port": 8080
       },
@@ -35,6 +36,7 @@
         "slave"
       ],
       "location": {
+        "protocol": "https",
         "host": "prod2.e2ebridge.com",
         "port": 8080
       },
@@ -47,6 +49,7 @@
         "slave"
       ],
       "location": {
+        "protocol": "https",
         "host": "prod3.e2ebridge.com",
         "port": 8080
       },

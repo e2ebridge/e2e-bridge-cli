@@ -31,7 +31,7 @@ module.exports.didSayWorking = didSayWorking;
 
 function didCreateInstance(spy, settings) {
     expect(spy)
-        .toHaveBeenCalledWith(settings.host, settings.port, settings.user, settings.password);
+        .toHaveBeenCalledWith(settings.protocol, settings.host, settings.port, settings.user, settings.password);
 }
 
 module.exports.didCreateInstance = didCreateInstance;

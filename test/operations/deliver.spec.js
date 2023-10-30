@@ -13,7 +13,7 @@ describe('"deliver" command', function() {
 
     let bridgeCreate;
     const bridgeInstance =
-        new Bridge('localhost', 8080, 'local_user', 'local_pw');
+        new Bridge('https', 'localhost', 8080, 'local_user', 'local_pw');
 
     beforeEach(function() {
         ioInterface = new TestIOInterface();
@@ -45,7 +45,7 @@ describe('"deliver" command', function() {
         expect(ioInterface.stdout).toContain('Reading configuration.\n');
         expect(ioInterface.stdout).toContain('Working, please wait.\n');
         expect(bridgeCreate)
-            .toHaveBeenCalledWith('localhost', 8080, 'local_user', 'local_pw');
+            .toHaveBeenCalledWith('https', 'localhost', 8080, 'local_user', 'local_pw');
 
         // deployment
         const deploymentOptions = Object.assign({}, cd.defaultDeploymentOptions, {startup: false});
@@ -108,7 +108,7 @@ describe('"deliver" command', function() {
         await main.main(settings, ioInterface);
         expect(ioInterface.stdout).toContain('Reading configuration.\n');
         expect(bridgeCreate)
-            .toHaveBeenCalledWith('localhost', 8080, 'local_user', 'local_pw');
+            .toHaveBeenCalledWith('https', 'localhost', 8080, 'local_user', 'local_pw');
 
         expect(ioInterface.stdout.match(/on .*localhost.* would run task\n/gm).length).toEqual(6);
     });

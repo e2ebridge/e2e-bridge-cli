@@ -43,6 +43,15 @@ const fs = require('fs');
  */
 
 /**
+ * Check if the given protocol is supported by the tool
+ * @param {string} protocol - Name of the operation
+ * @return {boolean}
+ */
+function isKnownProtocol(protocol) {
+    return Object.values(lib.protocols).includes(protocol);
+}
+
+/**
  * Check if the given operation has any meaning for the tool
  * @param {string} operation - Name of the operation
  * @return {boolean}
@@ -67,6 +76,9 @@ function requiresConnection(operation) {
  * @param {Array.<string>} positionalArguments -
  * @return {{errors: Array, settings}}
  */
+
+
+
 function createSettings(operation, namedArguments, positionalArguments) {
     const settings = transformOperation(operation);
     let errors = checkNamedArgs(settings['operation'], namedArguments);
@@ -91,13 +103,14 @@ function createSettings(operation, namedArguments, positionalArguments) {
 
 /**
  * Valid connection settings
- * @type {Readonly<{USER: string, PASSWORD: string, PORT: string, HOST: string}>}
+ * @type {Readonly<{USER: string, PASSWORD: string, PORT: string, HOST: string, PROTOCOL: string}>}
  */
 const CONNECTION_SETTINGS = Object.freeze({
     USER: 'user',
     PASSWORD: 'password',
     PORT: 'port',
-    HOST: 'host'
+    HOST: 'host',
+    PROTOCOL: 'protocol'
 });
 
 /**
@@ -129,6 +142,7 @@ function operationsExcept(...ops) {
  * @type {Readonly<object.<string,Array.<string>>>}
  */
 const SETTING_ACCEPTANCE = Object.freeze({
+    [CONNECTION_SETTINGS['PROTOCOL']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['HOST']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['PORT']]: operationsExcept(lib.operations.PACK),
     [CONNECTION_SETTINGS['USER']]: operationsExcept(lib.operations.PACK),
@@ -229,6 +243,8 @@ function namedArgsToSettings(operation, args) {
     settings[CONNECTION_SETTINGS['PASSWORD']] = args[CONNECTION_SETTINGS['PASSWORD']];
 
     settings[CONNECTION_SETTINGS['HOST']] = args[CONNECTION_SETTINGS['HOST']] || 'localhost';
+
+    settings[CONNECTION_SETTINGS['PROTOCOL']] = args[CONNECTION_SETTINGS['PROTOCOL']] || 'https';
 
     settings['nodejs'] = args['nodejs'];
     settings['java'] = args['java'];
@@ -590,7 +606,7 @@ async function executeNodeTaskList(taskList, settings, ioInterface) {
         Object.assign(cfg, credentials);
     }
 
-    const instance = E2EBridge.createInstance(cfg.location.host, cfg.location.port,
+    const instance = E2EBridge.createInstance(cfg.location.protocol, cfg.location.host, cfg.location.port,
         cfg.user, cfg.password);
 
     let promises = taskList.serviceTasks.map(async tasks => {
@@ -635,6 +651,7 @@ async function executeNodeTaskList(taskList, settings, ioInterface) {
 }
 
 
+module.exports.isKnownProtocol = isKnownProtocol;
 module.exports.isKnownOperation = isKnownOperation;
 module.exports.requiresConnection = requiresConnection;
 module.exports.createSettings = createSettings;

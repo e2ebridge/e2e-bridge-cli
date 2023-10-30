@@ -19,7 +19,7 @@ describe('service status commands', function() {
 
     let bridgeCreate;
     const bridgeInstance =
-        new Bridge(namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
+        new Bridge(namedArgs.protocol, namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
 
     let setStatusSpy;
 

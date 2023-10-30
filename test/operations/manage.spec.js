@@ -18,7 +18,7 @@ describe('service management commands', function() {
 
     let bridgeCreate;
     const bridgeInstance =
-        new Bridge(namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
+        new Bridge(namedArgs.protocol, namedArgs.host, namedArgs.port, namedArgs.user, namedArgs.password);
 
     beforeEach(function() {
         ioInterface = new TestIOInterface();
@@ -100,7 +100,7 @@ describe('service management commands', function() {
             c.didSayWorking(ioInterface);
 
             expect(bridgeCreate)
-                .toHaveBeenCalledWith(settings.host, settings.port, 'admin', 'secret');
+                .toHaveBeenCalledWith(settings.protocol, settings.host, settings.port, 'admin', 'secret');
 
             c.verifyLibCall(deploySpy, bridgeInstance, settings.file, settings.options);
         });

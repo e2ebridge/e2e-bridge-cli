@@ -1,6 +1,6 @@
 {
   "name": "e2e-bridge-cli",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "scripts": {
     "start": "node cli.js",
     "test": "cross-env node $NODE_DEBUG_OPTION ./node_modules/jasmine-xml-reporter/bin/jasmine.js",
@@ -16,7 +16,7 @@
   "dependencies": {
     "async": "^3.1.0",
     "clorox": "^1.0.3",
-    "e2e-bridge-lib": "^2.2.0",
+    "e2e-bridge-lib": "^3.0.0",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
     "prompts": "^2.2.1",

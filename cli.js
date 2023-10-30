@@ -73,6 +73,12 @@ if(positionalArguments.length < 1) {
     process.exit(1);
 }
 
+let protocol = argv['protocol'];
+if(!app.isKnownProtocol(protocol)) {
+    showHelp(`Unsupported protocol: ${protocol}`);
+    process.exit(1);
+}
+
 let operation = String.prototype.toLowerCase.call(positionalArguments.shift());
 if(!app.isKnownOperation(operation)) {
     showHelp(`Unknown operation: ${operation}`);
